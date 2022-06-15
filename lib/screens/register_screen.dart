@@ -51,7 +51,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 TextField(
                   decoration: InputDecoration(
                     border: UnderlineInputBorder(),
-                    labelText: "Username",
+                    labelText: "Username.",
                   ),
                 ),
                 TextField(
