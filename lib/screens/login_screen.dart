@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gro_app_ui/screens/first_page.dart';
 import 'package:gro_app_ui/screens/forgot_password.dart';
 import 'package:gro_app_ui/screens/register_screen.dart';
 
@@ -103,7 +104,7 @@ class _LoginPageState extends State<LoginPage> {
                        onPressed: (){
                           Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => const RegisterScreen()
+                              MaterialPageRoute(builder: (context) => const FirstPage()
                               )
                          );
 
