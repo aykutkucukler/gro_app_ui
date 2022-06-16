@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gro_app_ui/screens/first_page.dart';
 import 'package:gro_app_ui/screens/forgot_password.dart';
-import 'package:gro_app_ui/screens/register_screen.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -23,16 +21,16 @@ class _LoginPageState extends State<LoginPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                SizedBox(height: 80,),
+                const SizedBox(height: 80,),
                 Center(child: Padding(
                   padding: const EdgeInsets.only(bottom: 20.0),
                   child: Image.asset("assets/images/loging.png"),
                 )),
-                SizedBox(height: 60,),
+                const SizedBox(height: 60,),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    const Text("Loging",
+                  children: const [
+                    Text("Loging",
                       textAlign: TextAlign.left,
                       style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
                     ),
@@ -40,14 +38,14 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    const Text("Enter your email and password",
+                  children: const [
+                    Text("Enter your email and password",
                       style: TextStyle(fontWeight: FontWeight.normal, fontSize: 13),
                     ),
                   ],
                 ),
-                SizedBox(height: 15),
-                TextField(
+                const SizedBox(height: 15),
+                const TextField(
                   decoration: InputDecoration(
                     border: UnderlineInputBorder(),
                     labelText: "E-mail",
@@ -56,12 +54,12 @@ class _LoginPageState extends State<LoginPage> {
       TextField(
       obscureText: obsecure,
       decoration: InputDecoration(
-        suffixIcon: IconButton(icon:Icon(Icons.remove_red_eye),
+        suffixIcon: IconButton(icon:const Icon(Icons.remove_red_eye),
           onPressed: () {setState((){
             obsecure =! obsecure;
           }); },
         ),
-      border: UnderlineInputBorder(),
+      border: const UnderlineInputBorder(),
       labelText: "Password",
       )),
                 Row(
@@ -70,7 +68,7 @@ class _LoginPageState extends State<LoginPage> {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                         child: TextButton(
-                          child: Text('Forgot Password?', style: TextStyle(color: Colors.green, fontWeight: FontWeight.bold),),
+                          child: const Text('Forgot Password?', style: TextStyle(color: Colors.green, fontWeight: FontWeight.bold),),
                           onPressed: (){
                             Navigator.push(
                                 context,
@@ -87,7 +85,7 @@ class _LoginPageState extends State<LoginPage> {
                   child: ElevatedButton(
                       onPressed: () {
 
-                  }, child: Text('Log In'),
+                  }, child: const Text('Log In'),
                         ),
                 ),
                 Container(
@@ -97,14 +95,14 @@ class _LoginPageState extends State<LoginPage> {
                     children: <Widget>[
                       TextButton(
                         onPressed: () {  },
-                        child: Text('Don\'t have an account?', style: TextStyle(color: Color(0xFF2E3233))),
+                        child: const Text('Don\'t have an account?', style: TextStyle(color: Color(0xFF2E3233))),
                       ),
                       TextButton(
-                        child: Text('Sign Up', style: TextStyle(color: Color(0xFF84A2AF), fontWeight: FontWeight.bold),),
+                        child: const Text('Sign Up', style: TextStyle(color: Color(0xFF84A2AF), fontWeight: FontWeight.bold),),
                        onPressed: (){
                           Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => const FirstPage()
+                              MaterialPageRoute(builder: (context) => const LoginPage()
                               )
                          );
 
