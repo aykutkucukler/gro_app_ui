@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gro_app_ui/screens/forgot_password.dart';
 import 'package:gro_app_ui/screens/register_screen.dart';
 
 class LoginPage extends StatefulWidget {
@@ -67,12 +68,17 @@ class _LoginPageState extends State<LoginPage> {
                   children: [
                     Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: TextButton(
-                        onPressed: () {  },
-                        child: const Text("Forgot Password?",
+                        child: TextButton(
+                          child: Text('Forgot Password?', style: TextStyle(color: Colors.green, fontWeight: FontWeight.bold),),
+                          onPressed: (){
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => const ForgotPassword()
+                                )
+                            );
 
-                        ),
-                      ),
+                          },
+                        )
                     ),
                   ],
                 ),
