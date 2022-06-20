@@ -139,6 +139,7 @@ class _LoginPageState extends State<LoginPage> {
                             email: emailController.text,
                             password: passwordController.text,
                             context: context);
+
                       }
                     },
                     child: const Text('Log In'),

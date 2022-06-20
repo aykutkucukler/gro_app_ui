@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:gro_app_ui/screens/home_screen.dart';
 import 'package:gro_app_ui/screens/login_screen.dart';
 
@@ -25,107 +25,114 @@ class _RegisterScreenState extends State<RegisterScreen> {
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              const SizedBox(height: 30),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Center(
-                  child: Image.asset('assets/images/loging.png'),
+          child: Form(key: formGlobalKey,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const SizedBox(height: 30),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Center(
+                    child: Image.asset('assets/images/loging.png'),
+                  ),
                 ),
-              ),
-              const SizedBox(height: 30),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: const [
-                  Text(
-                    'Sign up',
-                    textAlign: TextAlign.left,
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: const [
-                  Text(
-                    'Enter your credentials to continue',
-                    textAlign: TextAlign.left,
-                    style:
-                    TextStyle(fontWeight: FontWeight.normal, fontSize: 18),
-                  ),
-                ],
-              ),
-              nameTextField(),
-              emailTextField(),
-              passwordTextField(),
-              Container(
-                alignment: FractionalOffset.center,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    TextButton(
-                      onPressed: () {},
-                      child: const Text('By continuing agree to our',
-                          style: TextStyle(color: Color(0xFF2E3233))),
+                const SizedBox(height: 30),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: const [
+                    Text(
+                      'Sign up',
+                      textAlign: TextAlign.left,
+                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
                     ),
-                    Expanded(
-                      child: TextButton(
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: const [
+                    Text(
+                      'Enter your credentials to continue',
+                      textAlign: TextAlign.left,
+                      style:
+                      TextStyle(fontWeight: FontWeight.normal, fontSize: 18),
+                    ),
+                  ],
+                ),
+                nameTextField(),
+                emailTextField(),
+                passwordTextField(),
+                Container(
+                  alignment: FractionalOffset.center,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      TextButton(
                         onPressed: () {},
-                        child:  const Text(
-                          'Term of services and services',
+                        child: const Text('By continuing agree to our',
+                            style: TextStyle(color: Color(0xFF2E3233))),
+                      ),
+                      Expanded(
+                        child: TextButton(
+                          onPressed: () {},
+                          child:  const Text(
+                            'Term of services and services',
+                            style: TextStyle(
+                                color: Color(0xFF84A2AF),
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: 50,
+                  width: 360,
+                  child: ElevatedButton(
+                    onPressed: () {
+                   if (formGlobalKey.currentState!.validate()) {
+
+
+                      createUserWithEmailAndPassword(
+                          context: context,
+                          email: emailController.text,
+                          password: passwordController.text);
+
+                    }
+                    },
+                    child: const Text('Sign Up'),
+                  ),
+                ),
+                Container(
+                  alignment: FractionalOffset.center,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      TextButton(
+                        onPressed: () {},
+                        child: const Text('Already have an account?',
+                            style: TextStyle(color: Color(0xFF2E3233))),
+                      ),
+                      TextButton(
+                        child: const Text(
+                          'Log In',
                           style: TextStyle(
                               color: Color(0xFF84A2AF),
                               fontWeight: FontWeight.bold),
                         ),
-                      ),
-                    )
-                  ],
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const LoginPage()));
+                        },
+                      )
+                    ],
+                  ),
                 ),
-              ),
-              SizedBox(
-                height: 50,
-                width: 360,
-                child: ElevatedButton(
-                  onPressed: () {
-                    createUserWithEmailAndPassword(
-                        context: context,
-                        email: emailController.text,
-                        password: passwordController.text);
-                  },
-                  child: const Text('Sign Up'),
-                ),
-              ),
-              Container(
-                alignment: FractionalOffset.center,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    TextButton(
-                      onPressed: () {},
-                      child: const Text('Already have an account?',
-                          style: TextStyle(color: Color(0xFF2E3233))),
-                    ),
-                    TextButton(
-                      child: const Text(
-                        'Log In',
-                        style: TextStyle(
-                            color: Color(0xFF84A2AF),
-                            fontWeight: FontWeight.bold),
-                      ),
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const LoginPage()));
-                      },
-                    )
-                  ],
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
@@ -135,6 +142,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
   TextFormField passwordTextField() {
     return TextFormField(
         controller: passwordController,
+        validator: (value){
+          if (value == null || value.length < 6) {
+            return "Check Password";
+          }
+          return null;
+        },
         obscureText: obsecure,
         decoration: InputDecoration(
           suffixIcon: IconButton(
@@ -180,7 +193,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
         required String password,
         required BuildContext context}) async {
     try {
-      UserCredential userCredential =
+      //bekleme gelcekk
+       UserCredential userCredential =
       await _firebaseAuth.createUserWithEmailAndPassword(
         email: email,
         password: password,
@@ -189,21 +203,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
       Navigator.push(
           context, MaterialPageRoute(builder: (context) => const HomeScreen()));
 
-    }
-    on FirebaseAuthException catch (e) {
+    } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
-        if (kDebugMode) {
-          print('The password provided is too weak.');
-        }
+        print('The password provided is too weak.');
       } else if (e.code == 'email-already-in-use') {
-        if (kDebugMode) {
-          print('The account already exists for that email.');
-        }
+        print('The account already exists for that email.');
       }
     } catch (e) {
-      if (kDebugMode) {
-        print(e);
-      }
+      print(e);
     }
   }
 }
