@@ -1,6 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:gro_app_ui/screens/forgot_password.dart';
 import 'package:gro_app_ui/screens/register_screen.dart';
+
+import '../user_entitiy.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -11,6 +14,10 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   bool obsecure = true;
+  final formGlobalKey = GlobalKey<FormState>();
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+  final _firebaseAuth = FirebaseAuth.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -18,132 +25,186 @@ class _LoginPageState extends State<LoginPage> {
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              const SizedBox(
-                height: 80,
-              ),
-              Center(
-                child: Padding(
-                  padding: const EdgeInsets.only(bottom: 20.0),
-                  child: Image.asset("assets/images/loging.png"),
+          child: Form(
+            key: formGlobalKey,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const SizedBox(
+                  height: 80,
                 ),
-              ),
-              const SizedBox(
-                height: 60,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: const [
-                  Text(
-                    "Loging",
-                    textAlign: TextAlign.left,
-                    style:
-                        TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
+                Center(
+                  child: Padding(
+                    padding: const EdgeInsets.only(bottom: 20.0),
+                    child: Image.asset("assets/images/loging.png"),
                   ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: const [
-                  Text(
-                    "Enter your email and password",
-                    style: TextStyle(
-                        fontWeight: FontWeight.normal, fontSize: 13),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 15),
-              const TextField(
-                decoration: InputDecoration(
-                  border: UnderlineInputBorder(),
-                  labelText: "E-mail",
                 ),
-              ),
-              TextField(
-                obscureText: obsecure,
-                decoration: InputDecoration(
-                  suffixIcon: IconButton(
-                    icon: const Icon(Icons.remove_red_eye),
-                    onPressed: () {
-                      setState(
-                        () {
-                          obsecure = !obsecure;
-                        },
-                      );
-                    },
-                  ),
-                  border: const UnderlineInputBorder(),
-                  labelText: "Password",
+                const SizedBox(
+                  height: 60,
                 ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: TextButton(
-                      child: const Text(
-                        'Forgot Password?',
-                        style: TextStyle(
-                          color: Colors.green,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: const [
+                    Text(
+                      "Loging",
+                      textAlign: TextAlign.left,
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: const [
+                    Text(
+                      "Enter your email and password",
+                      style: TextStyle(
+                          fontWeight: FontWeight.normal, fontSize: 13),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 15),
+                TextFormField(
+                  controller: emailController,
+                  validator: (value) {
+                    if (value == null || value.length == 0) {
+                      return "E-mail can not be null";
+                    }
+                    if (!isEmailValid(value!)) {
+                      return "Check E-mail";
+                    }
+                  },
+                  decoration: InputDecoration(
+                    border: UnderlineInputBorder(),
+                    labelText: "E-mail",
+                  ),
+                ),
+                TextFormField(
+                  controller: passwordController,
+                  validator: (value) {
+                    if (value == null || value.length < 6) {
+                      return "Check Password";
+                    }
+                  },
+                  obscureText: obsecure,
+                  decoration: InputDecoration(
+                    suffixIcon: IconButton(
+                      icon: const Icon(Icons.remove_red_eye),
                       onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const ForgotPassword(),
-                          ),
+                        setState(
+                          () {
+                            obsecure = !obsecure;
+                          },
                         );
                       },
                     ),
+                    border: const UnderlineInputBorder(),
+                    labelText: "Password",
                   ),
-                ],
-              ),
-              SizedBox(
-                height: 50,
-                width: 360,
-                child: ElevatedButton(
-                  onPressed: () {},
-                  child: const Text('Log In'),
                 ),
-              ),
-              Container(
-                alignment: FractionalOffset.center,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    TextButton(
-                      onPressed: () {},
-                      child: const Text('Don\'t have an account?',
-                          style: TextStyle(color: Color(0xFF2E3233))),
-                    ),
-                    TextButton(
-                      child: const Text(
-                        'Sign Up',
-                        style: TextStyle(
-                            color: Color(0xFF84A2AF),
-                            fontWeight: FontWeight.bold),
-                      ),
-                      onPressed: () {
-                        Navigator.push(
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: TextButton(
+                        child: const Text(
+                          'Forgot Password?',
+                          style: TextStyle(
+                            color: Colors.green,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        onPressed: () {
+                          Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) =>
-                                    const RegisterScreen()));
-                      },
-                    )
+                              builder: (context) => const ForgotPassword(),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
                   ],
                 ),
-              ),
-            ],
+                SizedBox(
+                  height: 50,
+                  width: 360,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      if (formGlobalKey.currentState!.validate()) {
+                        createUserWithEmailAndPassword(
+                            email: emailController.text, password: passwordController.text);
+
+                      }
+                    },
+                    child: const Text('Log In'),
+                  ),
+                ),
+                Container(
+                  alignment: FractionalOffset.center,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      TextButton(
+                        onPressed: () {},
+                        child: const Text('Don\'t have an account?',
+                            style: TextStyle(color: Color(0xFF2E3233))),
+                      ),
+                      TextButton(
+                        child: const Text(
+                          'Sign Up',
+                          style: TextStyle(
+                              color: Color(0xFF84A2AF),
+                              fontWeight: FontWeight.bold),
+                        ),
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      const RegisterScreen()));
+                        },
+                      )
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
     );
   }
+
+  bool isEmailValid(String email) {
+    RegExp regex = RegExp(
+        r'^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$');
+    return regex.hasMatch(email);
+  }
+  Future<UserEntity?> signInWithEmailAndPassword({
+    required String email,
+    required String password,
+  }) async {
+    final userCredential = await _firebaseAuth.signInWithEmailAndPassword(
+      email: email,
+      password: password,
+    );
+  }
+
+  @override
+  Future<UserEntity?> createUserWithEmailAndPassword({
+    required String email,
+    required String password,
+  }) async {
+
+      final userCredential = await _firebaseAuth.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+
+  }
 }
+
+
