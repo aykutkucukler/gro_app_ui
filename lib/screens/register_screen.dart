@@ -1,4 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:gro_app_ui/screens/home_screen.dart';
 import 'package:gro_app_ui/screens/login_screen.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -10,11 +13,16 @@ class RegisterScreen extends StatefulWidget {
 
 class _RegisterScreenState extends State<RegisterScreen> {
   bool obsecure = true;
+  final formGlobalKey = GlobalKey<FormState>();
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+  final userNameController = TextEditingController();
+  final _firebaseAuth = FirebaseAuth.instance;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body:Padding(
+      body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: SingleChildScrollView(
           child: Column(
@@ -24,15 +32,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
               const SizedBox(height: 30),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Center(child: Image.asset('assets/images/loging.png'),
+                child: Center(
+                  child: Image.asset('assets/images/loging.png'),
                 ),
               ),
               const SizedBox(height: 30),
-
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: const [
-                  Text('Sign up',
+                  Text(
+                    'Sign up',
                     textAlign: TextAlign.left,
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
                   ),
@@ -41,35 +50,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: const [
-                  Text('Enter your credentials to continue',
+                  Text(
+                    'Enter your credentials to continue',
                     textAlign: TextAlign.left,
-                    style: TextStyle(fontWeight: FontWeight.normal, fontSize: 18),
-                      ),
+                    style:
+                    TextStyle(fontWeight: FontWeight.normal, fontSize: 18),
+                  ),
                 ],
               ),
-              const TextField(
-                decoration: InputDecoration(
-                  border: UnderlineInputBorder(),
-                  labelText: "Username.",
-                ),
-              ),
-              const TextField(
-                decoration: InputDecoration(
-                  border: UnderlineInputBorder(),
-                  labelText: "E-mail",
-                ),
-              ),
-              TextField(
-                  obscureText: obsecure,
-                  decoration: InputDecoration(
-                    suffixIcon: IconButton(icon:const Icon(Icons.remove_red_eye),
-                      onPressed: () {setState((){
-                        obsecure =! obsecure;
-                      }); },
-                    ),
-                    border: const UnderlineInputBorder(),
-                    labelText: "Password",
-                  )),
+              nameTextField(),
+              emailTextField(),
+              passwordTextField(),
               Container(
                 alignment: FractionalOffset.center,
                 child: Row(
@@ -77,48 +68,58 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   children: <Widget>[
                     TextButton(
                       onPressed: () {},
-                      child: const Text('By continuing agree to our', style: TextStyle(color: Color(0xFF2E3233))),
+                      child: const Text('By continuing agree to our',
+                          style: TextStyle(color: Color(0xFF2E3233))),
                     ),
-                    TextButton(
-                      onPressed: () {  },
-                      child: const Text('Term of services and services', style: TextStyle(color: Color(0xFF84A2AF), fontWeight: FontWeight.bold),),
-
-
-
-
+                    Expanded(
+                      child: TextButton(
+                        onPressed: () {},
+                        child:  const Text(
+                          'Term of services and services',
+                          style: TextStyle(
+                              color: Color(0xFF84A2AF),
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ),
                     )
                   ],
                 ),
               ),
-
-              SizedBox( height: 50, width: 360,
+              SizedBox(
+                height: 50,
+                width: 360,
                 child: ElevatedButton(
                   onPressed: () {
-
-                  }, child: const Text('Sign In'),
-
-
+                    createUserWithEmailAndPassword(
+                        context: context,
+                        email: emailController.text,
+                        password: passwordController.text);
+                  },
+                  child: const Text('Sign Up'),
                 ),
               ),
-
               Container(
                 alignment: FractionalOffset.center,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     TextButton(
-                      onPressed: () {  },
-                      child: const Text('Already have an account?', style: TextStyle(color: Color(0xFF2E3233))),
+                      onPressed: () {},
+                      child: const Text('Already have an account?',
+                          style: TextStyle(color: Color(0xFF2E3233))),
                     ),
                     TextButton(
-                      child: const Text('Log In', style: TextStyle(color: Color(0xFF84A2AF), fontWeight: FontWeight.bold),),
-                      onPressed: (){
+                      child: const Text(
+                        'Log In',
+                        style: TextStyle(
+                            color: Color(0xFF84A2AF),
+                            fontWeight: FontWeight.bold),
+                      ),
+                      onPressed: () {
                         Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => const LoginPage()
-                            )
-                        );
-
+                            MaterialPageRoute(
+                                builder: (context) => const LoginPage()));
                       },
                     )
                   ],
@@ -129,5 +130,80 @@ class _RegisterScreenState extends State<RegisterScreen> {
         ),
       ),
     );
+  }
+
+  TextFormField passwordTextField() {
+    return TextFormField(
+        controller: passwordController,
+        obscureText: obsecure,
+        decoration: InputDecoration(
+          suffixIcon: IconButton(
+            icon: const Icon(Icons.remove_red_eye),
+            onPressed: () {
+              setState(() {
+                obsecure = !obsecure;
+              });
+            },
+          ),
+          border: const UnderlineInputBorder(),
+          labelText: "Password",
+        ));
+  }
+
+  TextFormField emailTextField() {
+    return TextFormField(
+      controller: emailController,
+      decoration:const InputDecoration(
+        border: UnderlineInputBorder(),
+        labelText: "E-mail",
+      ),
+    );
+  }
+
+  TextFormField nameTextField() {
+    return TextFormField(
+      validator: (value) {
+        if (value == null) {
+          return "Can not be null";
+        }
+      },
+      controller: userNameController,
+      decoration: const InputDecoration(
+        border: UnderlineInputBorder(),
+        labelText: "Username.",
+      ),
+    );
+  }
+
+  Future createUserWithEmailAndPassword(
+      {required String email,
+        required String password,
+        required BuildContext context}) async {
+    try {
+      UserCredential userCredential =
+      await _firebaseAuth.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => const HomeScreen()));
+
+    }
+    on FirebaseAuthException catch (e) {
+      if (e.code == 'weak-password') {
+        if (kDebugMode) {
+          print('The password provided is too weak.');
+        }
+      } else if (e.code == 'email-already-in-use') {
+        if (kDebugMode) {
+          print('The account already exists for that email.');
+        }
+      }
+    } catch (e) {
+      if (kDebugMode) {
+        print(e);
+      }
+    }
   }
 }

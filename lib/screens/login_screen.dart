@@ -1,9 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:gro_app_ui/screens/forgot_password.dart';
+import 'package:gro_app_ui/screens/home_screen.dart';
 import 'package:gro_app_ui/screens/register_screen.dart';
-
-import '../user_entitiy.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -50,7 +49,7 @@ class _LoginPageState extends State<LoginPage> {
                       "Loging",
                       textAlign: TextAlign.left,
                       style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
+                      TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
                     ),
                   ],
                 ),
@@ -71,11 +70,12 @@ class _LoginPageState extends State<LoginPage> {
                     if (value == null || value.length == 0) {
                       return "E-mail can not be null";
                     }
-                    if (!isEmailValid(value!)) {
+                    if (!isEmailValid(value)) {
                       return "Check E-mail";
                     }
+                    return null;
                   },
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     border: UnderlineInputBorder(),
                     labelText: "E-mail",
                   ),
@@ -86,6 +86,7 @@ class _LoginPageState extends State<LoginPage> {
                     if (value == null || value.length < 6) {
                       return "Check Password";
                     }
+                    return null;
                   },
                   obscureText: obsecure,
                   decoration: InputDecoration(
@@ -93,7 +94,7 @@ class _LoginPageState extends State<LoginPage> {
                       icon: const Icon(Icons.remove_red_eye),
                       onPressed: () {
                         setState(
-                          () {
+                              () {
                             obsecure = !obsecure;
                           },
                         );
@@ -134,9 +135,10 @@ class _LoginPageState extends State<LoginPage> {
                   child: ElevatedButton(
                     onPressed: () {
                       if (formGlobalKey.currentState!.validate()) {
-                        createUserWithEmailAndPassword(
-                            email: emailController.text, password: passwordController.text);
-
+                        signInWithEmailAndPassword(
+                            email: emailController.text,
+                            password: passwordController.text,
+                            context: context);
                       }
                     },
                     child: const Text('Log In'),
@@ -164,7 +166,7 @@ class _LoginPageState extends State<LoginPage> {
                               context,
                               MaterialPageRoute(
                                   builder: (context) =>
-                                      const RegisterScreen()));
+                                  const RegisterScreen()));
                         },
                       )
                     ],
@@ -183,28 +185,31 @@ class _LoginPageState extends State<LoginPage> {
         r'^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$');
     return regex.hasMatch(email);
   }
-  Future<UserEntity?> signInWithEmailAndPassword({
+
+  Future signInWithEmailAndPassword({
     required String email,
     required String password,
+    required BuildContext context,
   }) async {
-    final userCredential = await _firebaseAuth.signInWithEmailAndPassword(
-      email: email,
-      password: password,
-    );
-  }
-
-  @override
-  Future<UserEntity?> createUserWithEmailAndPassword({
-    required String email,
-    required String password,
-  }) async {
-
-      final userCredential = await _firebaseAuth.createUserWithEmailAndPassword(
+    try {
+      UserCredential userCredential =
+      await _firebaseAuth.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => const HomeScreen()));
+    } on FirebaseAuthException catch (e) {
 
+      //TODO:DEĞİŞECEK HATA KODLARI BUNLAR DEĞİL
+
+      if (e.code == 'weak-password') {
+        print('The password provided is too weak.');
+      } else if (e.code == 'email-already-in-use') {
+        print('The account already exists for that email.');
+      }
+    } catch (e) {
+      print(e);
+    }
   }
 }
-
-
