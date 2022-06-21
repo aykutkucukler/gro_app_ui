@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:gro_app_ui/screens/home_screen.dart';
 import 'package:gro_app_ui/screens/login_screen.dart';
 
@@ -12,12 +13,17 @@ class RegisterScreen extends StatefulWidget {
 
 class _RegisterScreenState extends State<RegisterScreen> {
   bool obsecure = true;
-  bool barrierDismissible = true;
   final formGlobalKey = GlobalKey<FormState>();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final userNameController = TextEditingController();
   final _firebaseAuth = FirebaseAuth.instance;
+  @override
+  void initState() {
+    EasyLoading.init();
+    // TODO: implement initState
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -208,11 +214,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
       required String password,
       required BuildContext context}) async {
     try {
+      await EasyLoading.show(
+        status: 'loading...',
+        maskType: EasyLoadingMaskType.black,
+      );
+
       UserCredential userCredential =
           await _firebaseAuth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
+      EasyLoading.dismiss();
 
       Navigator.push(
           context, MaterialPageRoute(builder: (context) => const HomeScreen()));

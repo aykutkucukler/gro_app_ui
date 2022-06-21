@@ -202,9 +202,9 @@ class _LoginPageState extends State<LoginPage> {
           context, MaterialPageRoute(builder: (context) => const HomeScreen()));
     } on FirebaseAuthException catch (e) {
 
-      //TODO:DEĞİŞECEK HATA KODLARI BUNLAR DEĞİL
 
-      if (e.code == 'weak-password') {
+
+      if (e.code == "user-not-found") {
         print('The password provided is too weak.');
       } else if (e.code == 'email-already-in-use') {
         print('The account already exists for that email.');
