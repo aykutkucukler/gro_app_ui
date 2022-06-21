@@ -1,6 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:gro_app_ui/screens/home_screen.dart';
 import 'package:gro_app_ui/screens/login_screen.dart';
 
@@ -13,6 +12,7 @@ class RegisterScreen extends StatefulWidget {
 
 class _RegisterScreenState extends State<RegisterScreen> {
   bool obsecure = true;
+  bool barrierDismissible = true;
   final formGlobalKey = GlobalKey<FormState>();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
@@ -138,6 +138,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
       ),
     );
   }
+  bool isEmailValid(String email) {
+    RegExp regex = RegExp(
+        r'^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$');
+    return regex.hasMatch(email);
+  }
 
   TextFormField passwordTextField() {
     return TextFormField(
@@ -166,6 +171,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
   TextFormField emailTextField() {
     return TextFormField(
       controller: emailController,
+      validator: (value) {
+        if (value == null || value.length == 0) {
+          return "E-mail can not be null";
+        }
+        if (!isEmailValid(value)) {
+          return "Check E-mail";
+        }
+        return null;
+      },
       decoration:const InputDecoration(
         border: UnderlineInputBorder(),
         labelText: "E-mail",
@@ -175,12 +189,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   TextFormField nameTextField() {
     return TextFormField(
-      validator: (value) {
-        if (value == null) {
-          return "Can not be null";
-        }
-      },
       controller: userNameController,
+      validator: (value){
+        if (value == null || value.length < 6) {
+          return "Check Password";
+        }
+        return null;
+      },
       decoration: const InputDecoration(
         border: UnderlineInputBorder(),
         labelText: "Username.",
@@ -193,7 +208,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
         required String password,
         required BuildContext context}) async {
     try {
-      //bekleme gelcekk
+
+
        UserCredential userCredential =
       await _firebaseAuth.createUserWithEmailAndPassword(
         email: email,
