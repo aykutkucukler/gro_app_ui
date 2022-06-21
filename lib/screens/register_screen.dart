@@ -25,7 +25,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: SingleChildScrollView(
-          child: Form(key: formGlobalKey,
+          child: Form(
+            key: formGlobalKey,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -44,7 +45,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     Text(
                       'Sign up',
                       textAlign: TextAlign.left,
-                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
                     ),
                   ],
                 ),
@@ -54,8 +56,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     Text(
                       'Enter your credentials to continue',
                       textAlign: TextAlign.left,
-                      style:
-                      TextStyle(fontWeight: FontWeight.normal, fontSize: 18),
+                      style: TextStyle(
+                          fontWeight: FontWeight.normal, fontSize: 18),
                     ),
                   ],
                 ),
@@ -75,7 +77,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       Expanded(
                         child: TextButton(
                           onPressed: () {},
-                          child:  const Text(
+                          child: const Text(
                             'Term of services and services',
                             style: TextStyle(
                                 color: Color(0xFF84A2AF),
@@ -91,15 +93,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   width: 360,
                   child: ElevatedButton(
                     onPressed: () {
-                   if (formGlobalKey.currentState!.validate()) {
-
-
-                      createUserWithEmailAndPassword(
-                          context: context,
-                          email: emailController.text,
-                          password: passwordController.text);
-
-                    }
+                      if (formGlobalKey.currentState!.validate()) {
+                        createUserWithEmailAndPassword(
+                            context: context,
+                            email: emailController.text,
+                            password: passwordController.text);
+                      }
                     },
                     child: const Text('Sign Up'),
                   ),
@@ -138,6 +137,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       ),
     );
   }
+
   bool isEmailValid(String email) {
     RegExp regex = RegExp(
         r'^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$');
@@ -147,7 +147,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   TextFormField passwordTextField() {
     return TextFormField(
         controller: passwordController,
-        validator: (value){
+        validator: (value) {
           if (value == null || value.length < 6) {
             return "Check Password";
           }
@@ -180,7 +180,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         }
         return null;
       },
-      decoration:const InputDecoration(
+      decoration: const InputDecoration(
         border: UnderlineInputBorder(),
         labelText: "E-mail",
       ),
@@ -205,20 +205,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   Future createUserWithEmailAndPassword(
       {required String email,
-        required String password,
-        required BuildContext context}) async {
+      required String password,
+      required BuildContext context}) async {
     try {
-
-
-       UserCredential userCredential =
-      await _firebaseAuth.createUserWithEmailAndPassword(
+      UserCredential userCredential =
+          await _firebaseAuth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
 
       Navigator.push(
           context, MaterialPageRoute(builder: (context) => const HomeScreen()));
-
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         print('The password provided is too weak.');
