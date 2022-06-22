@@ -235,7 +235,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
 
       if(e.code == "email-already-in-use") {
-        desc = "Email has account";}
+        desc = "E-mail already in use";}
 
       if(e.code == "email-already-in-use") {
         desc = "Email has account";}
