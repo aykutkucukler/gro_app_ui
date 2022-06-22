@@ -197,7 +197,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   TextFormField nameTextField() {
     return TextFormField(
       controller: userNameController,
-      validator: (value){
+      validator: (value) {
         if (value == null || value.length < 6) {
           return "Check Password";
         }
@@ -233,14 +233,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
       EasyLoading.dismiss();
       String desc = "";
 
+      if (e.code == "email-already-in-use") {
+        desc = "E-mail already in use";
+      }
 
-      if(e.code == "email-already-in-use") {
-        desc = "E-mail already in use";}
-
-      if(e.code == "email-already-in-use") {
-        desc = "Email has account";}
-
-
+      if (e.code == "email-already-in-use") {
+        desc = "Email has account";
+      }
 
       AppDialog(
           context: context,
@@ -253,7 +252,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
           btnOkIcon: Icons.cancel,
           btnOkColor: Colors.red)
         ..show();
-
 
       if (e.code == 'weak-password') {
         print('The password provided is too weak.');
