@@ -1,3 +1,4 @@
+import 'package:app_dialog/app_dialog.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:gro_app_ui/screens/forgot_password.dart';
@@ -201,6 +202,24 @@ class _LoginPageState extends State<LoginPage> {
       Navigator.push(
           context, MaterialPageRoute(builder: (context) => const HomeScreen()));
     } on FirebaseAuthException catch (e) {
+      String desc = "";
+
+      if(e.code == "user-not-found") {
+        desc = "kullanıcı bulunamadı";}
+
+
+
+      AppDialog(
+          context: context,
+          dialogType: DialogType.ERROR,
+          animType: AnimType.RIGHT_SLIDE,
+          headerAnimationLoop: false,
+          title: 'Error',
+          desc: desc,
+          btnOkOnPress: () {},
+          btnOkIcon: Icons.cancel,
+          btnOkColor: Colors.red)
+        ..show();
 
 
 
@@ -210,6 +229,7 @@ class _LoginPageState extends State<LoginPage> {
         print('The account already exists for that email.');
       }
     } catch (e) {
+
       print(e);
     }
   }

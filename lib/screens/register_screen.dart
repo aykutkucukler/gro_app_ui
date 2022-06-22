@@ -1,3 +1,4 @@
+import 'package:app_dialog/app_dialog.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -229,12 +230,38 @@ class _RegisterScreenState extends State<RegisterScreen> {
       Navigator.push(
           context, MaterialPageRoute(builder: (context) => const HomeScreen()));
     } on FirebaseAuthException catch (e) {
+      EasyLoading.dismiss();
+      String desc = "";
+
+
+      if(e.code == "email-already-in-use") {
+        desc = "Email has account";}
+
+      if(e.code == "email-already-in-use") {
+        desc = "Email has account";}
+
+
+
+      AppDialog(
+          context: context,
+          dialogType: DialogType.ERROR,
+          animType: AnimType.RIGHT_SLIDE,
+          headerAnimationLoop: false,
+          title: 'Error',
+          desc: desc,
+          btnOkOnPress: () {},
+          btnOkIcon: Icons.cancel,
+          btnOkColor: Colors.red)
+        ..show();
+
+
       if (e.code == 'weak-password') {
         print('The password provided is too weak.');
       } else if (e.code == 'email-already-in-use') {
         print('The account already exists for that email.');
       }
     } catch (e) {
+      EasyLoading.dismiss();
       print(e);
     }
   }
