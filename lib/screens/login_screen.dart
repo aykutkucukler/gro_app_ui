@@ -1,6 +1,7 @@
 import 'package:app_dialog/app_dialog.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:gro_app_ui/screens/forgot_password.dart';
 import 'package:gro_app_ui/screens/home_screen.dart';
 import 'package:gro_app_ui/screens/register_screen.dart';
@@ -194,14 +195,23 @@ class _LoginPageState extends State<LoginPage> {
     required BuildContext context,
   }) async {
     try {
+      await EasyLoading.show(
+        status: 'loading...',
+        maskType: EasyLoadingMaskType.black,
+      );
+
       UserCredential userCredential =
       await _firebaseAuth.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
+
+      EasyLoading.dismiss();
+
       Navigator.push(
           context, MaterialPageRoute(builder: (context) => const HomeScreen()));
     } on FirebaseAuthException catch (e) {
+      EasyLoading.dismiss();
       String desc = "";
 
       if(e.code == "user-not-found") {
@@ -219,7 +229,7 @@ class _LoginPageState extends State<LoginPage> {
           btnOkOnPress: () {},
           btnOkIcon: Icons.cancel,
           btnOkColor: Colors.red)
-        ..show();
+        .show();
 
 
 
@@ -229,6 +239,7 @@ class _LoginPageState extends State<LoginPage> {
         print('The account already exists for that email.');
       }
     } catch (e) {
+      EasyLoading.dismiss();
 
       print(e);
     }
