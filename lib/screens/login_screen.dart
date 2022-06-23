@@ -215,7 +215,7 @@ class _LoginPageState extends State<LoginPage> {
       String desc = "";
 
       if(e.code == "user-not-found") {
-        desc = "kullanıcı bulunamadı";}
+        desc = "User not found please create new account";}
 
 
 
