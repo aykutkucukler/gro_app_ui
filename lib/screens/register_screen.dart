@@ -5,6 +5,8 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:gro_app_ui/screens/home_screen.dart';
 import 'package:gro_app_ui/screens/login_screen.dart';
 
+import '../validators.dart';
+
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({Key? key}) : super(key: key);
 
@@ -57,8 +59,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                   ],
                 ),
-                SizedBox(height: 15,),
-
+                const SizedBox(
+                  height: 15,
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: const [
@@ -70,9 +73,34 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                   ],
                 ),
-                nameTextField(),
-                emailTextField(),
-                passwordTextField(),
+
+                //nameTextField(),
+                //emailTextField(),
+                customTextField(
+                  controller: userNameController,
+                  labelText: "Username",
+                  validator: Validators.validateUserName,
+                ),
+                customTextField(
+                  controller: emailController,
+                  labelText: "E-mail",
+                  validator: Validators.validateEmail,
+                ),
+                customTextField(
+                  controller: passwordController,
+                  labelText: "Password",
+                  obscureText: true,
+                  suffixIcon: IconButton(
+                    icon: const Icon(Icons.remove_red_eye),
+                    onPressed: () {
+                      setState(() {
+                        obsecure = !obsecure;
+                      });
+                    },
+                  ),
+                  validator: Validators.validatePassword,
+                ),
+
                 Container(
                   alignment: FractionalOffset.center,
                   child: Row(
@@ -147,70 +175,27 @@ class _RegisterScreenState extends State<RegisterScreen> {
     );
   }
 
-  bool isEmailValid(String email) {
-    RegExp regex = RegExp(
-        r'^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$');
-    return regex.hasMatch(email);
-  }
 
-  TextFormField passwordTextField() {
+  TextFormField customTextField({
+    TextEditingController? controller,
+    bool obscureText = false,
+    InputBorder? border = const UnderlineInputBorder(),
+    String? labelText,
+    String? Function(String? value)? validator,
+    Widget? suffixIcon,
+  }) {
     return TextFormField(
-        controller: passwordController,
-        validator: (value) {
-          if (value == null || value.length < 6) {
-            return "Check Password";
-          }
-          return null;
-        },
-        obscureText: obsecure,
+        controller: controller,
+        validator: validator,
+        obscureText: obscureText,
         decoration: InputDecoration(
-          suffixIcon: IconButton(
-            icon: const Icon(Icons.remove_red_eye),
-            onPressed: () {
-              setState(() {
-                obsecure = !obsecure;
-              });
-            },
-          ),
-          border: const UnderlineInputBorder(),
-          labelText: "Password",
+          suffixIcon: suffixIcon,
+          border: border,
+          labelText: labelText,
         ));
   }
 
-  TextFormField emailTextField() {
-    return TextFormField(
-      controller: emailController,
-      validator: (value) {
-        if (value == null || value.length == 0) {
-          return "E-mail can not be null";
-        }
-        if (!isEmailValid(value)) {
-          return "Check E-mail";
-        }
-        return null;
-      },
-      decoration: const InputDecoration(
-        border: UnderlineInputBorder(),
-        labelText: "E-mail",
-      ),
-    );
-  }
 
-  TextFormField nameTextField() {
-    return TextFormField(
-      controller: userNameController,
-      validator: (value) {
-        if (value == null || value.length < 6) {
-          return "Check Password";
-        }
-        return null;
-      },
-      decoration: const InputDecoration(
-        border: UnderlineInputBorder(),
-        labelText: "Username.",
-      ),
-    );
-  }
 
   Future createUserWithEmailAndPassword(
       {required String email,
@@ -231,6 +216,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
       Navigator.push(
           context, MaterialPageRoute(builder: (context) => const HomeScreen()));
+
     } on FirebaseAuthException catch (e) {
       EasyLoading.dismiss();
       String desc = "";
@@ -253,16 +239,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
           btnOkOnPress: () {},
           btnOkIcon: Icons.cancel,
           btnOkColor: Colors.red)
-        ..show();
+        .show();
 
       if (e.code == 'weak-password') {
-        print('The password provided is too weak.');
+        debugPrint('The password provided is too weak.');
       } else if (e.code == 'email-already-in-use') {
-        print('The account already exists for that email.');
+        debugPrint('The account already exists for that email.');
       }
     } catch (e) {
       EasyLoading.dismiss();
-      print(e);
+      debugPrint(e.toString());
     }
   }
 }
