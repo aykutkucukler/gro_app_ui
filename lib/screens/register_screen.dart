@@ -38,14 +38,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const SizedBox(height: 30),
+                const SizedBox(height: 80),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Center(
                     child: Image.asset('assets/images/loging.png'),
                   ),
                 ),
-                const SizedBox(height: 30),
+                const SizedBox(height: 70),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: const [
@@ -57,6 +57,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                   ],
                 ),
+                SizedBox(height: 15,),
+
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: const [
@@ -64,7 +66,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       'Enter your credentials to continue',
                       textAlign: TextAlign.left,
                       style: TextStyle(
-                          fontWeight: FontWeight.normal, fontSize: 18),
+                          fontWeight: FontWeight.normal, fontSize: 13),
                     ),
                   ],
                 ),
