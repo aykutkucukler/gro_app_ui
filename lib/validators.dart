@@ -21,7 +21,7 @@ class Validators {
 
   static String? validatePassword(String? value) {
     if (value?.isEmpty == true || (value?.length??0) < 6) {
-      return 'Şifre boş olamaz!';
+      return '6 karakterden az olamaz!';
     }
 
     return null;

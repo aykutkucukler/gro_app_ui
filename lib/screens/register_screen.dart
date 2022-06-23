@@ -6,6 +6,7 @@ import 'package:gro_app_ui/screens/home_screen.dart';
 import 'package:gro_app_ui/screens/login_screen.dart';
 
 import '../validators.dart';
+import '../widgets/custom_text_field.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({Key? key}) : super(key: key);
@@ -76,17 +77,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
                 //nameTextField(),
                 //emailTextField(),
-                customTextField(
+                CustomTextField(
                   controller: userNameController,
                   labelText: "Username",
                   validator: Validators.validateUserName,
                 ),
-                customTextField(
+                CustomTextField(
                   controller: emailController,
                   labelText: "E-mail",
                   validator: Validators.validateEmail,
                 ),
-                customTextField(
+                CustomTextField(
                   controller: passwordController,
                   labelText: "Password",
                   obscureText: true,
@@ -99,6 +100,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     },
                   ),
                   validator: Validators.validatePassword,
+                  border: null,
                 ),
 
                 Container(
@@ -176,24 +178,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   }
 
 
-  TextFormField customTextField({
-    TextEditingController? controller,
-    bool obscureText = false,
-    InputBorder? border = const UnderlineInputBorder(),
-    String? labelText,
-    String? Function(String? value)? validator,
-    Widget? suffixIcon,
-  }) {
-    return TextFormField(
-        controller: controller,
-        validator: validator,
-        obscureText: obscureText,
-        decoration: InputDecoration(
-          suffixIcon: suffixIcon,
-          border: border,
-          labelText: labelText,
-        ));
-  }
+
 
 
 

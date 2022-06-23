@@ -6,6 +6,9 @@ import 'package:gro_app_ui/screens/forgot_password.dart';
 import 'package:gro_app_ui/screens/home_screen.dart';
 import 'package:gro_app_ui/screens/register_screen.dart';
 
+import '../validators.dart';
+import '../widgets/custom_text_field.dart';
+
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
 
@@ -67,45 +70,25 @@ class _LoginPageState extends State<LoginPage> {
                   ],
                 ),
                 const SizedBox(height: 15),
-                TextFormField(
+                CustomTextField(
                   controller: emailController,
-                  validator: (value) {
-                    if (value == null || value.length == 0) {
-                      return "E-mail can not be null";
-                    }
-                    if (!isEmailValid(value)) {
-                      return "Check E-mail";
-                    }
-                    return null;
-                  },
-                  decoration: const InputDecoration(
-                    border: UnderlineInputBorder(),
-                    labelText: "E-mail",
-                  ),
+                  labelText: "E-mail",
+                  validator: Validators.validateEmail,
                 ),
-                TextFormField(
+                CustomTextField(
                   controller: passwordController,
-                  validator: (value) {
-                    if (value == null || value.length < 6) {
-                      return "Check Password";
-                    }
-                    return null;
-                  },
-                  obscureText: obsecure,
-                  decoration: InputDecoration(
-                    suffixIcon: IconButton(
-                      icon: const Icon(Icons.remove_red_eye),
-                      onPressed: () {
-                        setState(
-                              () {
-                            obsecure = !obsecure;
-                          },
-                        );
-                      },
-                    ),
-                    border: const UnderlineInputBorder(),
-                    labelText: "Password",
+                  labelText: "Password",
+                  obscureText: true,
+                  suffixIcon: IconButton(
+                    icon: const Icon(Icons.remove_red_eye),
+                    onPressed: () {
+                      setState(() {
+                        obsecure = !obsecure;
+                      });
+                    },
                   ),
+                  validator: Validators.validatePassword,
+                  border: null,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
