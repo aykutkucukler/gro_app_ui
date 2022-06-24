@@ -193,7 +193,7 @@ class _LoginPageState extends State<LoginPage> {
       EasyLoading.dismiss();
 
       Navigator.push(
-          context, MaterialPageRoute(builder: (context) => const HomeScreen()));
+          context, MaterialPageRoute(builder: (context) => HomeScreen()));
     } on FirebaseAuthException catch (e) {
       EasyLoading.dismiss();
       String desc = "";

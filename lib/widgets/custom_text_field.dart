@@ -12,7 +12,7 @@ class CustomTextField extends StatelessWidget {
       {Key? key,
         required this.controller,
         required this.validator,
-        this.obscureText = true,
+        this.obscureText = false,
         this.suffixIcon,
         this.border,
         required this.labelText})

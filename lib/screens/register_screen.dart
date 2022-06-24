@@ -200,7 +200,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       EasyLoading.dismiss();
 
       Navigator.push(
-          context, MaterialPageRoute(builder: (context) => const HomeScreen()));
+          context, MaterialPageRoute(builder: (context) => HomeScreen()));
 
     } on FirebaseAuthException catch (e) {
       EasyLoading.dismiss();
