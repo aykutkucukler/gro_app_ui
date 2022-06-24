@@ -63,7 +63,9 @@ class HomeScreen extends StatelessWidget {
                     TextButton(
                       onPressed: () {},
                       child: const Text('Exclusive Order',
-                          style: TextStyle(color: Color(0xFF2E3233))),
+                          style: TextStyle(
+                              color: Color(0xFF2E3233),
+                            fontWeight: FontWeight.bold)),
                     ),
                     TextButton(
                       child: const Text(
