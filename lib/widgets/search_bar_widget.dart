@@ -15,14 +15,16 @@ class SearchBarWidget extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Image.asset(searchIcon),
+          Image.asset(searchIcon,
+            height: 20,
+          ),
           const SizedBox(
             width: 8,
           ),
           const Text(
             "search store",
             style: TextStyle(
-                fontSize: 18,
+                fontSize: 15,
                 fontWeight: FontWeight.bold,
                 color: Color(0xFF7C7C7C)),
           ),

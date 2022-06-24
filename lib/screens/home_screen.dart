@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:gro_app_ui/screens/login_screen.dart';
 import 'package:gro_app_ui/widgets/search_bar_widget.dart';
+import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
@@ -65,7 +66,7 @@ class HomeScreen extends StatelessWidget {
                       child: const Text('Exclusive Order',
                           style: TextStyle(
                               color: Color(0xFF2E3233),
-                            fontWeight: FontWeight.bold)),
+                              fontWeight: FontWeight.bold)),
                     ),
                     TextButton(
                       child: const Text(
@@ -83,7 +84,6 @@ class HomeScreen extends StatelessWidget {
                     )
                   ],
                 ),
-                
               ],
             ),
           ),
