@@ -25,11 +25,11 @@ class _FirstPageState extends State<FirstPage> {
                 child: Image.asset('assets/images/123123.png'),
 
               ),
-              Text("WELCOME TO OUR GROCERİES STORE"
+              const Text("WELCOME TO OUR GROCERİES STORE"
               ),
 
               ElevatedButton(
-                child: Text('LOG IN'),
+                child: const Text('LOG IN'),
                 onPressed: () {
                   Navigator.push(
                       context,
@@ -40,7 +40,7 @@ class _FirstPageState extends State<FirstPage> {
                 },
               ),
               ElevatedButton(
-                child: Text('SIGN UP'),
+                child: const Text('SIGN UP'),
                 onPressed: () {
                   Navigator.push(
                       context,

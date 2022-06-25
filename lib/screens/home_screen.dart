@@ -1,13 +1,31 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:gro_app_ui/screens/login_screen.dart';
 import 'package:gro_app_ui/widgets/search_bar_widget.dart';
-import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeScreen extends StatelessWidget {
+  const HomeScreen({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
+    List<Widget> images = [
+      Image.asset("assets/images/loging.png"),
+      Image.asset("assets/images/banner_background.png"),
+      Image.asset("assets/images/loging.png"),
+      Image.asset("assets/images/banner_background.png"),
+      Image.asset("assets/images/loging.png"),
+    ];
     return Scaffold(
+      appBar: AppBar(
+          leading: IconButton(
+        icon: Icon(Icons.logout),
+        onPressed: () {
+          logout(context);
+        },
+      )),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Center(
@@ -24,38 +42,9 @@ class HomeScreen extends StatelessWidget {
                 const SizedBox(
                   height: 25,
                 ),
-                CarouselSlider(options: CarouselOptions(height: 115.0), items: [
-                  Container(
-                    margin: const EdgeInsets.all(6.0),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8.0),
-                      image: const DecorationImage(
-                        image:
-                            AssetImage("assets/images/banner_background.png"),
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
-                  Container(
-                    margin: const EdgeInsets.all(6.0),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8.0),
-                      image: const DecorationImage(
-                        image: AssetImage("assets/images/banner_image.png"),
-                      ),
-                    ),
-                  ),
-                  Container(
-                    margin: const EdgeInsets.all(6.0),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8.0),
-                      image: const DecorationImage(
-                        image: AssetImage("assets/images/loging.png"),
-                      ),
-                    ),
-                  ),
-                ]),
-                SizedBox(
+                CarouselSlider(
+                    options: CarouselOptions(height: 135.0), items: images),
+                const SizedBox(
                   height: 25,
                 ),
                 Row(
@@ -84,11 +73,53 @@ class HomeScreen extends StatelessWidget {
                     )
                   ],
                 ),
+                Column(
+                  children: [
+                    Row(
+                      children: [
+                        Expanded(
+                            child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Container(
+                              width: 200, height: 100, color: Colors.red),
+                        )),
+                        Expanded(
+                            child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Container(
+                            width: 200,
+                            height: 100,
+                            color: Colors.red,
+                            child: Stack(children: const [
+                              Align(
+                                  alignment: Alignment.bottomRight,
+                                  child: Icon(
+                                    Icons.add,
+                                    color: Colors.white,
+                                  ))
+                            ]),
+                          ),
+                        )),
+                      ],
+                    ),
+                  ],
+                )
               ],
             ),
           ),
         ),
       ),
     );
+  }
+
+  logout(BuildContext context) async {
+    EasyLoading.show();
+    FirebaseAuth.instance.signOut();
+    var pref = await SharedPreferences.getInstance();
+    await pref.remove("is_user_active");
+    EasyLoading.dismiss();
+    Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(builder: (context) => LoginPage()),
+        (Route<dynamic> route) => false);
   }
 }

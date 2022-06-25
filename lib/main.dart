@@ -5,8 +5,8 @@ import 'app.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await EasyLoading.init();
+   EasyLoading.init();
   await Firebase.initializeApp();
-  runApp(const MyApp());
+  runApp( const MyApp());
 }
 

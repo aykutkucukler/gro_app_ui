@@ -32,6 +32,7 @@ dependencies:
   flutter_image_slideshow: any
   image_slider:
   persistent_bottom_nav_bar: ^4.0.2
+  shared_preferences: ^2.0.15
 
 
 

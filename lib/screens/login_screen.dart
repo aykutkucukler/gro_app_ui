@@ -5,6 +5,8 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:gro_app_ui/screens/forgot_password.dart';
 import 'package:gro_app_ui/screens/home_screen.dart';
 import 'package:gro_app_ui/screens/register_screen.dart';
+import 'package:gro_app_ui/sharedPrefrence.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../validators.dart';
 import '../widgets/custom_text_field.dart';
@@ -22,6 +24,12 @@ class _LoginPageState extends State<LoginPage> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final _firebaseAuth = FirebaseAuth.instance;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -54,11 +62,13 @@ class _LoginPageState extends State<LoginPage> {
                       "Loging",
                       textAlign: TextAlign.left,
                       style:
-                      TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
                     ),
                   ],
                 ),
-                SizedBox(height: 20,),
+                SizedBox(
+                  height: 20,
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: const [
@@ -125,7 +135,6 @@ class _LoginPageState extends State<LoginPage> {
                             email: emailController.text,
                             password: passwordController.text,
                             context: context);
-
                       }
                     },
                     child: const Text('Log In'),
@@ -153,7 +162,7 @@ class _LoginPageState extends State<LoginPage> {
                               context,
                               MaterialPageRoute(
                                   builder: (context) =>
-                                  const RegisterScreen()));
+                                      const RegisterScreen()));
                         },
                       )
                     ],
@@ -185,11 +194,13 @@ class _LoginPageState extends State<LoginPage> {
       );
 
       UserCredential userCredential =
-      await _firebaseAuth.signInWithEmailAndPassword(
+          await _firebaseAuth.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
 
+      SharedPreferences pref = await SharedPreferences.getInstance();
+      await pref.setBool("is_user_active", true);
       EasyLoading.dismiss();
 
       Navigator.push(
@@ -197,25 +208,21 @@ class _LoginPageState extends State<LoginPage> {
     } on FirebaseAuthException catch (e) {
       EasyLoading.dismiss();
       String desc = "";
-
-      if(e.code == "user-not-found") {
-        desc = "User not found please create new account";}
-
-
+      if (e.code == "user-not-found") {
+        desc = "User not found please create new account";
+      }
 
       AppDialog(
-          context: context,
-          dialogType: DialogType.ERROR,
-          animType: AnimType.RIGHT_SLIDE,
-          headerAnimationLoop: false,
-          title: 'Error',
-          desc: desc,
-          btnOkOnPress: () {},
-          btnOkIcon: Icons.cancel,
-          btnOkColor: Colors.red)
-        .show();
-
-
+              context: context,
+              dialogType: DialogType.ERROR,
+              animType: AnimType.RIGHT_SLIDE,
+              headerAnimationLoop: false,
+              title: 'Error',
+              desc: desc,
+              btnOkOnPress: () {},
+              btnOkIcon: Icons.cancel,
+              btnOkColor: Colors.red)
+          .show();
 
       if (e.code == "user-not-found") {
         print('The password provided is too weak.');
@@ -228,4 +235,5 @@ class _LoginPageState extends State<LoginPage> {
       print(e);
     }
   }
+
 }
