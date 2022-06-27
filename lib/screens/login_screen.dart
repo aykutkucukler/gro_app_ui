@@ -3,9 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:gro_app_ui/screens/forgot_password.dart';
-import 'package:gro_app_ui/screens/home_screen.dart';
+import 'package:gro_app_ui/screens/main_bottom_home.dart';
 import 'package:gro_app_ui/screens/register_screen.dart';
-import 'package:gro_app_ui/sharedPrefrence.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../validators.dart';
@@ -66,7 +65,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 Row(
@@ -176,11 +175,6 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  bool isEmailValid(String email) {
-    RegExp regex = RegExp(
-        r'^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$');
-    return regex.hasMatch(email);
-  }
 
   Future signInWithEmailAndPassword({
     required String email,
@@ -203,8 +197,9 @@ class _LoginPageState extends State<LoginPage> {
       await pref.setBool("is_user_active", true);
       EasyLoading.dismiss();
 
-      Navigator.push(
-          context, MaterialPageRoute(builder: (context) => HomeScreen()));
+       Navigator.push(
+          context, MaterialPageRoute(builder: (context) => const MainBottomHomePage()));
+
     } on FirebaseAuthException catch (e) {
       EasyLoading.dismiss();
       String desc = "";

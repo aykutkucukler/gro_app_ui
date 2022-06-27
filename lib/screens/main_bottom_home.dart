@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:gro_app_ui/screens/home_screen.dart';
-import 'package:gro_app_ui/screens/login_screen.dart';
 import 'package:gro_app_ui/screens/register_screen.dart';
 
 class MainBottomHomePage extends StatefulWidget {

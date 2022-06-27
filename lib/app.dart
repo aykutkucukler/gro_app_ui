@@ -35,10 +35,25 @@ class _MyAppState extends State<MyApp> {
         home: FutureBuilder<bool>(
             future: getBool(),
             builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
-              if (snapshot.data==true) {
-                return MainBottomHomePage();
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return Scaffold(
+                  body: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: const [
+                        Center(
+                            child: CircularProgressIndicator(
+                          color: Colors.red,
+                              strokeWidth: 100,
+                        ))
+                      ]),
+                );
+              } else if (snapshot.data == true) {
+                return const MainBottomHomePage();
+              } else if (snapshot.data == false) {
+                return const LoginPage();
               } else {
-                return LoginPage();
+                return Container();
               }
             }));
   }

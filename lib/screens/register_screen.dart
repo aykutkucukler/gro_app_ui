@@ -2,8 +2,9 @@ import 'package:app_dialog/app_dialog.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:gro_app_ui/screens/home_screen.dart';
 import 'package:gro_app_ui/screens/login_screen.dart';
+import 'package:gro_app_ui/screens/main_bottom_home.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../validators.dart';
 import '../widgets/custom_text_field.dart';
@@ -193,14 +194,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
       );
 
       UserCredential userCredential =
-          await _firebaseAuth.createUserWithEmailAndPassword(
+      await _firebaseAuth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
+
+
+      SharedPreferences pref = await SharedPreferences.getInstance();
+      await pref.setBool("is_user_active", true);
       EasyLoading.dismiss();
 
       Navigator.push(
-          context, MaterialPageRoute(builder: (context) => HomeScreen()));
+          context, MaterialPageRoute(builder: (context) => MainBottomHomePage()));
 
     } on FirebaseAuthException catch (e) {
       EasyLoading.dismiss();

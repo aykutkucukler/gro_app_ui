@@ -14,7 +14,7 @@ class HomeScreen extends StatelessWidget {
     List<Widget> images = [
       Image.asset("assets/images/loging.png"),
       Image.asset("assets/images/banner_background.png"),
-      Image.asset("assets/images/loging.png"),
+      Image.asset("assets/images/banner_image.png"),
       Image.asset("assets/images/banner_background.png"),
       Image.asset("assets/images/loging.png"),
     ];
@@ -81,7 +81,7 @@ class HomeScreen extends StatelessWidget {
                             child: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Container(
-                              width: 200, height: 100, color: Colors.red),
+                              width: 200, height: 100, color: Colors.white),
                         )),
                         Expanded(
                             child: Padding(
@@ -89,13 +89,13 @@ class HomeScreen extends StatelessWidget {
                           child: Container(
                             width: 200,
                             height: 100,
-                            color: Colors.red,
+                            color: Colors.white,
                             child: Stack(children: const [
                               Align(
                                   alignment: Alignment.bottomRight,
                                   child: Icon(
                                     Icons.add,
-                                    color: Colors.white,
+                                    color: Colors.black54,
                                   ))
                             ]),
                           ),
