@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gro_app_ui/screens/home_screen.dart';
 import 'package:gro_app_ui/screens/home_screen_account.dart';
 import 'package:gro_app_ui/screens/home_screen_cart.dart';
+import 'package:gro_app_ui/screens/home_screen_explore.dart';
 import 'package:gro_app_ui/screens/home_screen_favorite.dart';
 
 class MainBottomHomePage extends StatefulWidget {
@@ -12,7 +13,7 @@ class MainBottomHomePage extends StatefulWidget {
 }
 
 class _MainBottomHomePageState extends State<MainBottomHomePage> {
-  List<Widget> pages = [const HomeScreen(), const CartScreen(),const FavoriteScreen(),const AccountScreen(),];
+  List<Widget> pages = [const HomeScreen(),const ExploreScreen(),const CartScreen(),const FavoriteScreen(),const AccountScreen(),];
   int i = 0;
 
   @override
@@ -24,6 +25,11 @@ class _MainBottomHomePageState extends State<MainBottomHomePage> {
             icon: Icon(Icons.home),
             label: "Home",
             backgroundColor: Colors.purple
+          ),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.travel_explore),
+              label: "Explore",
+              backgroundColor: Colors.blueAccent
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.add_shopping_cart),
