@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gro_app_ui/screens/home_screen.dart';
-import 'package:gro_app_ui/screens/register_screen.dart';
+import 'package:gro_app_ui/screens/home_screen_cart.dart';
 
 class MainBottomHomePage extends StatefulWidget {
   const MainBottomHomePage({Key? key}) : super(key: key);
@@ -10,7 +10,7 @@ class MainBottomHomePage extends StatefulWidget {
 }
 
 class _MainBottomHomePageState extends State<MainBottomHomePage> {
-  List<Widget> pages = [HomeScreen(), const RegisterScreen(),];
+  List<Widget> pages = [const HomeScreen(), const CartScreen(),];
   int i = 0;
 
   @override
@@ -23,9 +23,14 @@ class _MainBottomHomePageState extends State<MainBottomHomePage> {
             label: "Home",
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.ad_units),
-            label: "AVC",
+            icon: Icon(Icons.add_shopping_cart),
+            label: "Cart",
           ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.favorite),
+            label: "Favorite",
+          ),
+
         ],
         onTap: (value) {
           setState(() {
