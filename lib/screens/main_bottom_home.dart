@@ -24,22 +24,22 @@ class _MainBottomHomePageState extends State<MainBottomHomePage> {
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: "Home",
-            backgroundColor: Colors.purple
+            backgroundColor: Colors.green
           ),
           BottomNavigationBarItem(
               icon: Icon(Icons.travel_explore),
               label: "Explore",
-              backgroundColor: Colors.blueAccent
+              backgroundColor: Colors.green
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.add_shopping_cart),
             label: "Cart",
-            backgroundColor: Colors.deepOrange
+            backgroundColor: Colors.green
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.favorite),
             label: "Favorite",
-            backgroundColor: Colors.amber
+            backgroundColor: Colors.green
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.account_circle_outlined),

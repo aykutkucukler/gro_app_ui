@@ -20,12 +20,23 @@ class HomeScreen extends StatelessWidget {
     ];
     return Scaffold(
       appBar: AppBar(
-          leading: IconButton(
-        icon: Icon(Icons.logout),
-        onPressed: () {
-          logout(context);
-        },
-      )),
+        title: const Padding(
+          padding: EdgeInsets.only(left: 85.0),
+          child: Text("Groceries"),
+        ),
+        leading: IconButton(
+          icon: const Icon(Icons.logout),
+          onPressed: () {
+            logout(context);
+          },
+        ),
+        actions: <Widget>[
+          Padding(
+              padding: const EdgeInsets.only(right: 3.0),
+              child: IconButton(
+                  icon: const Icon(Icons.settings), onPressed: () {})),
+        ],
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Center(
@@ -34,7 +45,10 @@ class HomeScreen extends StatelessWidget {
                 const SizedBox(
                   height: 20,
                 ),
-                Image.asset("assets/images/loging.png"),
+                Image.asset(
+                  "assets/images/loging.png",
+                  height: 35,
+                ),
                 const SizedBox(
                   height: 20,
                 ),
@@ -91,19 +105,85 @@ class HomeScreen extends StatelessWidget {
                             height: 100,
                             color: Colors.white,
                             child: Stack(children: const [
-                              Align(
-                                  alignment: Alignment.bottomRight,
-                                  child: Icon(
-                                    Icons.add,
-                                    color: Colors.black54,
-                                  ))
+                              Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: Align(
+                                    alignment: Alignment.bottomRight,
+                                    child: Icon(
+                                      Icons.add_shopping_cart_outlined,
+                                      color: Colors.black54,
+                                    )),
+                              )
                             ]),
                           ),
                         )),
                       ],
                     ),
                   ],
-                )
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[
+                    TextButton(
+                      onPressed: () {},
+                      child: const Text('Best Selling',
+                          style: TextStyle(
+                              color: Color(0xFF2E3233),
+                              fontWeight: FontWeight.bold)),
+                    ),
+                    TextButton(
+                      child: const Text(
+                        'See all',
+                        style: TextStyle(
+                            color: Color(0xFF84A2AF),
+                            fontWeight: FontWeight.bold),
+                      ),
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const LoginPage()));
+                      },
+                    )
+                  ],
+                ),
+                Column(
+                  children: [
+                    Row(
+                      children: [
+                        Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Container(
+                                  width: 200, height: 100, color: Colors.white),
+                            )),
+                        Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Container(
+                                width: 200,
+                                height: 100,
+                                color: Colors.white,
+                                child: Stack(children: const [
+                                  Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Align(
+                                        alignment: Alignment.bottomRight,
+                                        child: Icon(
+                                          Icons.add_shopping_cart_outlined,
+                                          color: Colors.black54,
+                                        )),
+                                  )
+                                ]),
+                              ),
+                            )),
+                      ],
+                    ),
+                  ],
+                ),
               ],
             ),
           ),
@@ -119,7 +199,7 @@ class HomeScreen extends StatelessWidget {
     await pref.remove("is_user_active");
     EasyLoading.dismiss();
     Navigator.of(context).pushAndRemoveUntil(
-        MaterialPageRoute(builder: (context) => LoginPage()),
+        MaterialPageRoute(builder: (context) => const LoginPage()),
         (Route<dynamic> route) => false);
   }
 }

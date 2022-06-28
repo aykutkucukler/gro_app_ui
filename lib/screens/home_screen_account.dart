@@ -12,7 +12,7 @@ class _AccountScreenState extends State<AccountScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("ACCOUNT"),
+        title: Text("Account"),
       ),
     );
   }
