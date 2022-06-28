@@ -156,32 +156,58 @@ class HomeScreen extends StatelessWidget {
                       children: [
                         Expanded(
                             child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Container(
-                                  width: 200, height: 100, color: Colors.white),
-                            )),
+                          padding: const EdgeInsets.all(8.0),
+                          child: Container(
+                              width: 200, height: 100, color: Colors.white),
+                        )),
                         Expanded(
                             child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Container(
-                                width: 200,
-                                height: 100,
-                                color: Colors.white,
-                                child: Stack(children: const [
-                                  Padding(
-                                    padding: EdgeInsets.all(8.0),
-                                    child: Align(
-                                        alignment: Alignment.bottomRight,
-                                        child: Icon(
-                                          Icons.add_shopping_cart_outlined,
-                                          color: Colors.black54,
-                                        )),
-                                  )
-                                ]),
-                              ),
-                            )),
+                          padding: const EdgeInsets.all(8.0),
+                          child: Container(
+                            width: 200,
+                            height: 100,
+                            color: Colors.white,
+                            child: Stack(children: const [
+                              Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: Align(
+                                    alignment: Alignment.bottomRight,
+                                    child: Icon(
+                                      Icons.add_shopping_cart_outlined,
+                                      color: Colors.black54,
+                                    )),
+                              )
+                            ]),
+                          ),
+                        )),
                       ],
                     ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[
+                    TextButton(
+                      onPressed: () {},
+                      child: const Text('Groceries',
+                          style: TextStyle(
+                              color: Color(0xFF2E3233),
+                              fontWeight: FontWeight.bold)),
+                    ),
+                    TextButton(
+                      child: const Text(
+                        'See all',
+                        style: TextStyle(
+                            color: Color(0xFF84A2AF),
+                            fontWeight: FontWeight.bold),
+                      ),
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const LoginPage()));
+                      },
+                    )
                   ],
                 ),
               ],
