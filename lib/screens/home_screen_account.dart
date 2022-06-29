@@ -23,12 +23,19 @@ class _AccountScreenState extends State<AccountScreen> {
                   minRadius: 50,
                 ),
                 Text(
-                  "Ayşe Can Ercan\n",
-                  style: TextStyle(fontSize: 20, color: Colors.black54),
+                  ' Ayşe Fatma\n',
+                  textAlign: TextAlign.left,
+                  style:
+                  TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
+                ),
+                SizedBox(
+                  height: 15,
                 ),
                 Text(
-                  "aysecan@gmail.com",
-                  style: TextStyle(fontSize: 20, color: Colors.black54),
+                  'aysefatma@gmail.com',
+                  textAlign: TextAlign.left,
+                  style: TextStyle(
+                      fontWeight: FontWeight.normal, fontSize: 13),
                 ),
               ],
             ),
