@@ -32,10 +32,38 @@ class AccountScreen extends StatelessWidget {
                 items: [
                   SettingsItem(
                     onTap: () {},
+                    icons: CupertinoIcons.bag,
+                    iconStyle: IconStyle(),
+                    title: 'Orders',
+                    subtitle: "Your delivered orders",
+                  ),
+                  SettingsItem(
+                    onTap: () {},
                     icons: CupertinoIcons.pencil_outline,
                     iconStyle: IconStyle(),
-                    title: 'Appearance',
-                    subtitle: "Make Ziar'App yours",
+                    title: 'My Details',
+                    subtitle: "Fill your İdentify",
+                  ),
+                  SettingsItem(
+                    onTap: () {},
+                    icons: CupertinoIcons.location_solid,
+                    iconStyle: IconStyle(),
+                    title: 'Delivery Adress',
+                    subtitle: "You Can Select Your Location",
+                  ),
+                  SettingsItem(
+                    onTap: () {},
+                    icons: CupertinoIcons.pencil_outline,
+                    iconStyle: IconStyle(),
+                    title: 'Payment Methods',
+                    subtitle: "Your Payment Methods Details",
+                  ),
+                  SettingsItem(
+                    onTap: () {},
+                    icons: CupertinoIcons.bell_fill,
+                    iconStyle: IconStyle(),
+                    title: 'Notification',
+                    subtitle: "Select your notification settings",
                   ),
                   SettingsItem(
                     onTap: () {},
@@ -65,6 +93,13 @@ class AccountScreen extends StatelessWidget {
                   ),
                 ],
               ),
+              SettingsItem(
+                onTap: () {},
+                icons: CupertinoIcons.question_circle,
+                iconStyle: IconStyle(),
+                title: 'Help',
+                subtitle: "Reach to information for help",
+              ),
               SettingsGroup(
                 items: [
                   SettingsItem(
@@ -74,7 +109,7 @@ class AccountScreen extends StatelessWidget {
                       backgroundColor: Colors.purple,
                     ),
                     title: 'About',
-                    subtitle: "Learn more about Ziar'App",
+                    subtitle: "Learn more about Groceries'App",
                   ),
                 ],
               ),
