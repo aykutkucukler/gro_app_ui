@@ -2,16 +2,23 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:babstrap_settings_screen/babstrap_settings_screen.dart';
 
-class AccountScreen extends StatelessWidget {
+class AccountScreen extends StatefulWidget {
   const AccountScreen({Key? key}) : super(key: key);
 
   @override
+  State<AccountScreen> createState() => _AccountScreenState();
+}
+
+class _AccountScreenState extends State<AccountScreen> {
+  @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
+
       home: Scaffold(
         backgroundColor: Colors.white.withOpacity(.94),
         appBar: AppBar(
-          title: Text(
+          title: const Text(
             "Account",
             style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
           ),
@@ -26,7 +33,7 @@ class AccountScreen extends StatelessWidget {
               // user card
               SimpleUserCard(
                 userName: "Ayşe Can Ercan",
-                userProfilePic: AssetImage("assets/images/profilepic.png"),
+                userProfilePic: const AssetImage("assets/images/profilepic.png"),
               ),
               SettingsGroup(
                 items: [
@@ -151,7 +158,7 @@ class AccountScreen extends StatelessWidget {
                     onTap: () {},
                     icons: CupertinoIcons.delete_solid,
                     title: "Delete account",
-                    titleStyle: TextStyle(
+                    titleStyle: const TextStyle(
                       color: Colors.red,
                       fontWeight: FontWeight.bold,
                     ),
