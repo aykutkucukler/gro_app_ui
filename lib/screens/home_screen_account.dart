@@ -1,78 +1,111 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:babstrap_settings_screen/babstrap_settings_screen.dart';
 
-class AccountScreen extends StatefulWidget {
+class AccountScreen extends StatelessWidget {
   const AccountScreen({Key? key}) : super(key: key);
 
   @override
-  State<AccountScreen> createState() => _AccountScreenState();
-}
-
-class _AccountScreenState extends State<AccountScreen> {
-  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Row(
-              children: const [
-                CircleAvatar(
-                  backgroundImage: AssetImage("assets/images/profilepic.png"),
-                  maxRadius: 50,
-                  minRadius: 50,
-                ),
-                Text(
-                  ' Ayşe Fatma\n',
-                  textAlign: TextAlign.left,
-                  style:
-                  TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
-                ),
-                SizedBox(
-                  height: 15,
-                ),
-                Text(
-                  'aysefatma@gmail.com',
-                  textAlign: TextAlign.left,
-                  style: TextStyle(
-                      fontWeight: FontWeight.normal, fontSize: 13),
-                ),
-              ],
-            ),
+    return MaterialApp(
+      home: Scaffold(
+        backgroundColor: Colors.white.withOpacity(.94),
+        appBar: AppBar(
+          title: Text(
+            "Account",
+            style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
           ),
-          Row(children: const <Widget>[
-            Icon(Icons.shopping_bag_outlined),
-            Text("Orders")
-          ]),
-          Row(children: const <Widget>[
-            Icon(Icons.account_circle_outlined),
-            Text("My Details")
-          ]),
-          Row(children: const <Widget>[
-            Icon(Icons.location_on_outlined),
-            Text("Delivery Address")
-          ]),
-          Row(children: const <Widget>[
-            Icon(Icons.credit_card),
-            Text("Payment Methods")
-          ]),
-          Row(children: const <Widget>[
-            Icon(Icons.card_giftcard_outlined),
-            Text("Promo Card")
-          ]),
-          Row(children: const <Widget>[
-            Icon(Icons.add_alert_sharp),
-            Text("Notifaction")
-          ]),
-          Row(children: const <Widget>[
-            Icon(Icons.help_outline_outlined),
-            Text("Help")
-          ]),
-          Row(children: const <Widget>[
-            Icon(Icons.align_vertical_bottom_outlined),
-            Text("About")
-          ]),
-        ],
+          centerTitle: true,
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+        ),
+        body: Padding(
+          padding: const EdgeInsets.all(10),
+          child: ListView(
+            children: [
+              // user card
+              SimpleUserCard(
+                userName: "Ayşe Can Ercan",
+                userProfilePic: AssetImage("assets/images/profilepic.png"),
+              ),
+              SettingsGroup(
+                items: [
+                  SettingsItem(
+                    onTap: () {},
+                    icons: CupertinoIcons.pencil_outline,
+                    iconStyle: IconStyle(),
+                    title: 'Appearance',
+                    subtitle: "Make Ziar'App yours",
+                  ),
+                  SettingsItem(
+                    onTap: () {},
+                    icons: Icons.fingerprint,
+                    iconStyle: IconStyle(
+                      iconsColor: Colors.white,
+                      withBackground: true,
+                      backgroundColor: Colors.red,
+                    ),
+                    title: 'Privacy',
+                    subtitle: "Lock Ziar'App to improve your privacy",
+                  ),
+                  SettingsItem(
+                    onTap: () {},
+                    icons: Icons.dark_mode_rounded,
+                    iconStyle: IconStyle(
+                      iconsColor: Colors.white,
+                      withBackground: true,
+                      backgroundColor: Colors.red,
+                    ),
+                    title: 'Dark mode',
+                    subtitle: "Automatic",
+                    trailing: Switch.adaptive(
+                      value: false,
+                      onChanged: (value) {},
+                    ),
+                  ),
+                ],
+              ),
+              SettingsGroup(
+                items: [
+                  SettingsItem(
+                    onTap: () {},
+                    icons: Icons.info_rounded,
+                    iconStyle: IconStyle(
+                      backgroundColor: Colors.purple,
+                    ),
+                    title: 'About',
+                    subtitle: "Learn more about Ziar'App",
+                  ),
+                ],
+              ),
+              // You can add a settings title
+              SettingsGroup(
+                settingsGroupTitle: "Account",
+                items: [
+                  SettingsItem(
+                    onTap: () {},
+                    icons: Icons.exit_to_app_rounded,
+                    title: "Sign Out",
+                  ),
+                  SettingsItem(
+                    onTap: () {},
+                    icons: CupertinoIcons.repeat,
+                    title: "Change email",
+                  ),
+                  SettingsItem(
+                    onTap: () {},
+                    icons: CupertinoIcons.delete_solid,
+                    title: "Delete account",
+                    titleStyle: TextStyle(
+                      color: Colors.red,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
