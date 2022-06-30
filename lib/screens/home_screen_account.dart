@@ -33,35 +33,55 @@ class AccountScreen extends StatelessWidget {
                   SettingsItem(
                     onTap: () {},
                     icons: CupertinoIcons.bag,
-                    iconStyle: IconStyle(),
+                    iconStyle: IconStyle(
+                      iconsColor: Colors.white,
+                      withBackground: true,
+                      backgroundColor: Colors.blue,
+                    ),
                     title: 'Orders',
                     subtitle: "Your delivered orders",
                   ),
                   SettingsItem(
                     onTap: () {},
                     icons: CupertinoIcons.pencil_outline,
-                    iconStyle: IconStyle(),
+                    iconStyle: IconStyle(
+                      iconsColor: Colors.white,
+                      withBackground: true,
+                      backgroundColor: Colors.orange,
+                    ),
                     title: 'My Details',
                     subtitle: "Fill your İdentify",
                   ),
                   SettingsItem(
                     onTap: () {},
                     icons: CupertinoIcons.location_solid,
-                    iconStyle: IconStyle(),
+                    iconStyle: IconStyle(
+                      iconsColor: Colors.white,
+                      withBackground: true,
+                      backgroundColor: Colors.purple,
+                    ),
                     title: 'Delivery Adress',
                     subtitle: "You Can Select Your Location",
                   ),
                   SettingsItem(
                     onTap: () {},
                     icons: CupertinoIcons.pencil_outline,
-                    iconStyle: IconStyle(),
+                    iconStyle: IconStyle(
+                      iconsColor: Colors.white,
+                      withBackground: true,
+                      backgroundColor: Colors.green,
+                    ),
                     title: 'Payment Methods',
                     subtitle: "Your Payment Methods Details",
                   ),
                   SettingsItem(
                     onTap: () {},
                     icons: CupertinoIcons.bell_fill,
-                    iconStyle: IconStyle(),
+                    iconStyle: IconStyle(
+                      iconsColor: Colors.white,
+                      withBackground: true,
+                      backgroundColor: Colors.amber,
+                    ),
                     title: 'Notification',
                     subtitle: "Select your notification settings",
                   ),
@@ -82,7 +102,7 @@ class AccountScreen extends StatelessWidget {
                     iconStyle: IconStyle(
                       iconsColor: Colors.white,
                       withBackground: true,
-                      backgroundColor: Colors.red,
+                      backgroundColor: Colors.purpleAccent,
                     ),
                     title: 'Dark mode',
                     subtitle: "Automatic",
@@ -106,7 +126,7 @@ class AccountScreen extends StatelessWidget {
                     onTap: () {},
                     icons: Icons.info_rounded,
                     iconStyle: IconStyle(
-                      backgroundColor: Colors.purple,
+                      backgroundColor: Colors.greenAccent,
                     ),
                     title: 'About',
                     subtitle: "Learn more about Groceries'App",
