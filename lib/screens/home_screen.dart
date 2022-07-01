@@ -95,7 +95,19 @@ class HomeScreen extends StatelessWidget {
                             child: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Container(
-                              width: 200, height: 100, color: Colors.white),
+                              width: 200, height: 100, color: Colors.white,
+                            child: Stack(children: const [
+                              Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: Align(
+                                    alignment: Alignment.bottomRight,
+                                    child: Icon(
+                                      Icons.add_shopping_cart_outlined,
+                                      color: Colors.black54,
+                                    )),
+                              )
+                            ]),
+                          ),
                         )),
                         Expanded(
                             child: Padding(
