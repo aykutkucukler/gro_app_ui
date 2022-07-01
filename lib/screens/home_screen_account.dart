@@ -57,7 +57,7 @@ class _AccountScreenState extends State<AccountScreen> {
                       backgroundColor: Colors.orange,
                     ),
                     title: 'My Details',
-                    subtitle: "Fill your İdentify",
+                    subtitle: "Fill your Identify",
                   ),
                   SettingsItem(
                     onTap: () {},
@@ -67,7 +67,7 @@ class _AccountScreenState extends State<AccountScreen> {
                       withBackground: true,
                       backgroundColor: Colors.purple,
                     ),
-                    title: 'Delivery Adress',
+                    title: 'Delivery Address',
                     subtitle: "You Can Select Your Location",
                   ),
                   SettingsItem(
@@ -101,7 +101,7 @@ class _AccountScreenState extends State<AccountScreen> {
                       backgroundColor: Colors.red,
                     ),
                     title: 'Privacy',
-                    subtitle: "Lock Ziar'App to improve your privacy",
+                    subtitle: "Lock Groceries App to improve your privacy",
                   ),
                   SettingsItem(
                     onTap: () {},

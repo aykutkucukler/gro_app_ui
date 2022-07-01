@@ -17,12 +17,12 @@ class _ExploreScreenState extends State<ExploreScreen> {
           child: Center(
             child: Column(
               children: [
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
+                  children: const [
                     Text(
                       "Find Products",
                       style:
@@ -31,7 +31,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
                   ],
                 ),
 
-                SizedBox(height: 20,),
+                const SizedBox(height: 20,),
 
                 SearchBarWidget(),
 

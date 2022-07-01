@@ -16,7 +16,7 @@ class HomeScreen extends StatelessWidget {
       Image.asset("assets/images/banner_background.png"),
       Image.asset("assets/images/banner_image.png"),
       Image.asset("assets/images/banner_background.png"),
-      Image.asset("assets/images/loging.png"),
+      Image.asset("assets/images/sebzemeyve.jpg"),
     ];
     return Scaffold(
       appBar: AppBar(
@@ -121,7 +121,7 @@ class HomeScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 Row(
