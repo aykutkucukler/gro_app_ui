@@ -2,13 +2,21 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:gro_app_ui/model/buy_item_model.dart';
 import 'package:gro_app_ui/screens/login_screen.dart';
+import 'package:gro_app_ui/widgets/collect_items.dart';
+import 'package:gro_app_ui/widgets/item_widget.dart';
 import 'package:gro_app_ui/widgets/search_bar_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     List<Widget> images = [
@@ -18,6 +26,9 @@ class HomeScreen extends StatelessWidget {
       Image.asset("assets/images/banner_background.png"),
       Image.asset("assets/images/sebzemeyve.jpg"),
     ];
+
+    List<ItemWidget> buyItems = [];
+
     return Scaffold(
       appBar: AppBar(
         title: const Padding(
@@ -87,52 +98,53 @@ class HomeScreen extends StatelessWidget {
                     )
                   ],
                 ),
-                Column(
-                  children: [
-                    Row(
+                Container(
+                    height: 150,
+                    child: ListView(
+                      scrollDirection: Axis.horizontal,
                       children: [
-                        Expanded(
-                            child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Container(
-                              width: 200, height: 100, color: Colors.white,
-                            child: Stack(children: const [
-                              Padding(
-                                padding: EdgeInsets.all(8.0),
-                                child: Align(
-                                    alignment: Alignment.bottomRight,
-                                    child: Icon(
-                                      Icons.add_shopping_cart_outlined,
-                                      color: Colors.black54,
-                                    )),
-                              )
-                            ]),
-                          ),
-                        )),
-                        Expanded(
-                            child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Container(
-                            width: 200,
-                            height: 100,
-                            color: Colors.white,
-                            child: Stack(children: const [
-                              Padding(
-                                padding: EdgeInsets.all(8.0),
-                                child: Align(
-                                    alignment: Alignment.bottomRight,
-                                    child: Icon(
-                                      Icons.add_shopping_cart_outlined,
-                                      color: Colors.black54,
-                                    )),
-                              )
-                            ]),
-                          ),
-                        )),
+                        ItemWidget(
+                            buyItem: BuyItem(
+                                "https://www.gercekhayat.com.tr/wp-content/uploads/2019/10/AdobeStock_172352188-800x450.jpg"),
+                            function: () {
+                              setState(() {
+                                CollectItem.collectItems.add(
+                                  BuyItem(
+                                      "https://www.gercekhayat.com.tr/wp-content/uploads/2019/10/AdobeStock_172352188-800x450.jpg"),
+                                );
+                              });
+                            },
+                            isInChart: false,
+                            deleteFunction: () {
+                              setState(() {
+                                CollectItem.collectItems.remove(
+                                  BuyItem(
+                                      "https://www.gercekhayat.com.tr/wp-content/uploads/2019/10/AdobeStock_172352188-800x450.jpg"),
+                                );
+                              });
+                            }),
+                        ItemWidget(
+                            buyItem: BuyItem(
+                                "https://www.gercekhayat.com.tr/wp-content/uploads/2019/10/AdobeStock_172352188-800x450.jpg"),
+                            function: () {
+                              setState(() {
+                                CollectItem.collectItems.add(
+                                  BuyItem(
+                                      "https://www.gercekhayat.com.tr/wp-content/uploads/2019/10/AdobeStock_172352188-800x450.jpg"),
+                                );
+                              });
+                            },
+                            isInChart: false,
+                            deleteFunction: () {
+                              setState(() {
+                                CollectItem.collectItems.remove(
+                                  BuyItem(
+                                      "https://www.gercekhayat.com.tr/wp-content/uploads/2019/10/AdobeStock_172352188-800x450.jpg"),
+                                );
+                              });
+                            }),
                       ],
-                    ),
-                  ],
-                ),
+                    )),
                 const SizedBox(
                   height: 20,
                 ),
@@ -162,40 +174,33 @@ class HomeScreen extends StatelessWidget {
                     )
                   ],
                 ),
-                Column(
-                  children: [
-                    Row(
+                Container(
+                    height: 150,
+                    child: ListView(
+                      scrollDirection: Axis.horizontal,
                       children: [
-                        Expanded(
-                            child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Container(
-                              width: 200, height: 100, color: Colors.white),
-                        )),
-                        Expanded(
-                            child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Container(
-                            width: 200,
-                            height: 100,
-                            color: Colors.white,
-                            child: Stack(children: const [
-                              Padding(
-                                padding: EdgeInsets.all(8.0),
-                                child: Align(
-                                    alignment: Alignment.bottomRight,
-                                    child: Icon(
-                                      Icons.add_shopping_cart_outlined,
-                                      color: Colors.black54,
-                                    )),
-                              )
-                            ]),
-                          ),
-                        )),
+                        ItemWidget(
+                            buyItem: BuyItem(
+                                "https://www.gercekhayat.com.tr/wp-content/uploads/2019/10/AdobeStock_172352188-800x450.jpg"),
+                            function: () {
+                              setState(() {
+                                CollectItem.collectItems.add(
+                                  BuyItem(
+                                      "https://www.gercekhayat.com.tr/wp-content/uploads/2019/10/AdobeStock_172352188-800x450.jpg"),
+                                );
+                              });
+                            },
+                            isInChart: false,
+                            deleteFunction: () {
+                              setState(() {
+                                CollectItem.collectItems.remove(
+                                  BuyItem(
+                                      "https://www.gercekhayat.com.tr/wp-content/uploads/2019/10/AdobeStock_172352188-800x450.jpg"),
+                                );
+                              });
+                            }),
                       ],
-                    ),
-                  ],
-                ),
+                    )),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: <Widget>[

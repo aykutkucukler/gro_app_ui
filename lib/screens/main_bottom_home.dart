@@ -13,7 +13,13 @@ class MainBottomHomePage extends StatefulWidget {
 }
 
 class _MainBottomHomePageState extends State<MainBottomHomePage> {
-  List<Widget> pages = [const HomeScreen(),const ExploreScreen(),const CartScreen(),const FavoriteScreen(),const AccountScreen(),];
+  List<Widget> pages = [
+    const HomeScreen(),
+    const ExploreScreen(),
+    const CartScreen(),
+    const FavoriteScreen(),
+    const AccountScreen(),
+  ];
   int i = 0;
 
   @override
@@ -22,31 +28,25 @@ class _MainBottomHomePageState extends State<MainBottomHomePage> {
       bottomNavigationBar: BottomNavigationBar(
         items: const [
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: "Home",
-            backgroundColor: Colors.green
-          ),
+              icon: Icon(Icons.home),
+              label: "Home",
+              backgroundColor: Colors.green),
           BottomNavigationBarItem(
               icon: Icon(Icons.travel_explore),
               label: "Explore",
-              backgroundColor: Colors.green
-          ),
+              backgroundColor: Colors.green),
           BottomNavigationBarItem(
-            icon: Icon(Icons.add_shopping_cart),
-            label: "Cart",
-            backgroundColor: Colors.green
-          ),
+              icon: Icon(Icons.add_shopping_cart),
+              label: "Cart",
+              backgroundColor: Colors.green),
           BottomNavigationBarItem(
-            icon: Icon(Icons.favorite),
-            label: "Favorite",
-            backgroundColor: Colors.green
-          ),
+              icon: Icon(Icons.favorite),
+              label: "Favorite",
+              backgroundColor: Colors.green),
           BottomNavigationBarItem(
-            icon: Icon(Icons.account_circle_outlined),
-            label: "Account",
-            backgroundColor: Colors.green
-          ),
-
+              icon: Icon(Icons.account_circle_outlined),
+              label: "Account",
+              backgroundColor: Colors.green),
         ],
         onTap: (value) {
           setState(() {
