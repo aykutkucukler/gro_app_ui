@@ -30,6 +30,26 @@ class _HomeScreenState extends State<HomeScreen> {
     List<Widget> bestSellings = [
       ItemWidget(
           buyItem: BuyItem(
+              "https://i.lezzet.com.tr/images-xxlarge-secondary/seftali-nasil-saklanir-7d592d01-9971-4b8a-a68a-6b2ff46877c5.jpg"),
+          function: () {
+            setState(() {
+              CollectItem.collectItems.add(
+                BuyItem(
+                    "https://i.lezzet.com.tr/images-xxlarge-secondary/seftali-nasil-saklanir-7d592d01-9971-4b8a-a68a-6b2ff46877c5.jpg"),
+              );
+            });
+          },
+          isInChart: false,
+          deleteFunction: () {
+            setState(() {
+              CollectItem.collectItems.remove(
+                BuyItem(
+                    "https://i.lezzet.com.tr/images-xxlarge-secondary/seftali-nasil-saklanir-7d592d01-9971-4b8a-a68a-6b2ff46877c5.jpg"),
+              );
+            });
+          }),
+      ItemWidget(
+          buyItem: BuyItem(
               "https://www.gercekhayat.com.tr/wp-content/uploads/2019/10/AdobeStock_172352188-800x450.jpg"),
           function: () {
             setState(() {
@@ -45,6 +65,26 @@ class _HomeScreenState extends State<HomeScreen> {
               CollectItem.collectItems.remove(
                 BuyItem(
                     "https://www.gercekhayat.com.tr/wp-content/uploads/2019/10/AdobeStock_172352188-800x450.jpg"),
+              );
+            });
+          }),
+      ItemWidget(
+          buyItem: BuyItem(
+              "https://i.cnnturk.com/i/cnnturk/75/1200x675/6291efa3214ed8082cae98be"),
+          function: () {
+            setState(() {
+              CollectItem.collectItems.add(
+                BuyItem(
+                    "https://i.cnnturk.com/i/cnnturk/75/1200x675/6291efa3214ed8082cae98be"),
+              );
+            });
+          },
+          isInChart: false,
+          deleteFunction: () {
+            setState(() {
+              CollectItem.collectItems.remove(
+                BuyItem(
+                    "https://i.cnnturk.com/i/cnnturk/75/1200x675/6291efa3214ed8082cae98be"),
               );
             });
           }),
@@ -53,12 +93,12 @@ class _HomeScreenState extends State<HomeScreen> {
     List<Widget> exclusiveOrder = [
       ItemWidget(
           buyItem: BuyItem(
-              "https://www.gercekhayat.com.tr/wp-content/uploads/2019/10/AdobeStock_172352188-800x450.jpg"),
+              "https://i20.haber7.net/resize/1300x788//haber/haber7/photos/2021/31/armudun_faydalari_nelerdir_kac_cesit_armut_vardir_armut_neye_iyi_gelir_1628259910_2773.jpg"),
           function: () {
             setState(() {
               CollectItem.collectItems.add(
                 BuyItem(
-                    "https://www.gercekhayat.com.tr/wp-content/uploads/2019/10/AdobeStock_172352188-800x450.jpg"),
+                    "https://i20.haber7.net/resize/1300x788//haber/haber7/photos/2021/31/armudun_faydalari_nelerdir_kac_cesit_armut_vardir_armut_neye_iyi_gelir_1628259910_2773.jpg"),
               );
             });
           },
@@ -67,7 +107,27 @@ class _HomeScreenState extends State<HomeScreen> {
             setState(() {
               CollectItem.collectItems.remove(
                 BuyItem(
-                    "https://www.gercekhayat.com.tr/wp-content/uploads/2019/10/AdobeStock_172352188-800x450.jpg"),
+                    "https://i20.haber7.net/resize/1300x788//haber/haber7/photos/2021/31/armudun_faydalari_nelerdir_kac_cesit_armut_vardir_armut_neye_iyi_gelir_1628259910_2773.jpg"),
+              );
+            });
+          }),
+      ItemWidget(
+          buyItem: BuyItem(
+              "https://i.lezzet.com.tr/images-xxlarge-secondary/seftali-nasil-saklanir-7d592d01-9971-4b8a-a68a-6b2ff46877c5.jpg"),
+          function: () {
+            setState(() {
+              CollectItem.collectItems.add(
+                BuyItem(
+                    "https://i.lezzet.com.tr/images-xxlarge-secondary/seftali-nasil-saklanir-7d592d01-9971-4b8a-a68a-6b2ff46877c5.jpg"),
+              );
+            });
+          },
+          isInChart: false,
+          deleteFunction: () {
+            setState(() {
+              CollectItem.collectItems.remove(
+                BuyItem(
+                    "https://i.lezzet.com.tr/images-xxlarge-secondary/seftali-nasil-saklanir-7d592d01-9971-4b8a-a68a-6b2ff46877c5.jpg"),
               );
             });
           }),
@@ -88,6 +148,26 @@ class _HomeScreenState extends State<HomeScreen> {
               CollectItem.collectItems.remove(
                 BuyItem(
                     "https://www.gercekhayat.com.tr/wp-content/uploads/2019/10/AdobeStock_172352188-800x450.jpg"),
+              );
+            });
+          }),
+      ItemWidget(
+          buyItem: BuyItem(
+              "https://fotogaleri.star.com.tr/fotogaleri/maintmps/2021/06/04/040620216348-41.jpg"),
+          function: () {
+            setState(() {
+              CollectItem.collectItems.add(
+                BuyItem(
+                    "https://fotogaleri.star.com.tr/fotogaleri/maintmps/2021/06/04/040620216348-41.jpg"),
+              );
+            });
+          },
+          isInChart: false,
+          deleteFunction: () {
+            setState(() {
+              CollectItem.collectItems.remove(
+                BuyItem(
+                    "https://fotogaleri.star.com.tr/fotogaleri/maintmps/2021/06/04/040620216348-41.jpg"),
               );
             });
           }),
@@ -115,12 +195,12 @@ class _HomeScreenState extends State<HomeScreen> {
           }),
       ItemWidget(
           buyItem: BuyItem(
-              "https://i20.haber7.net/resize/1300x788//haber/haber7/photos/2021/31/armudun_faydalari_nelerdir_kac_cesit_armut_vardir_armut_neye_iyi_gelir_1628259910_2773.jpg"),
+              "https://i.lezzet.com.tr/images-xxlarge-secondary/seftali-nasil-saklanir-7d592d01-9971-4b8a-a68a-6b2ff46877c5.jpg"),
           function: () {
             setState(() {
               CollectItem.collectItems.add(
                 BuyItem(
-                    "https://i20.haber7.net/resize/1300x788//haber/haber7/photos/2021/31/armudun_faydalari_nelerdir_kac_cesit_armut_vardir_armut_neye_iyi_gelir_1628259910_2773.jpg"),
+                    "https://i.lezzet.com.tr/images-xxlarge-secondary/seftali-nasil-saklanir-7d592d01-9971-4b8a-a68a-6b2ff46877c5.jpg"),
               );
             });
           },
@@ -129,7 +209,7 @@ class _HomeScreenState extends State<HomeScreen> {
             setState(() {
               CollectItem.collectItems.remove(
                 BuyItem(
-                    "https://i20.haber7.net/resize/1300x788//haber/haber7/photos/2021/31/armudun_faydalari_nelerdir_kac_cesit_armut_vardir_armut_neye_iyi_gelir_1628259910_2773.jpg"),
+                    "https://i.lezzet.com.tr/images-xxlarge-secondary/seftali-nasil-saklanir-7d592d01-9971-4b8a-a68a-6b2ff46877c5.jpg"),
               );
             });
           }),
@@ -178,8 +258,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 const SizedBox(
                   height: 25,
                 ),
-                SizedBox(
-                  height: 25,
+                const SizedBox(
+                  height: 10,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
