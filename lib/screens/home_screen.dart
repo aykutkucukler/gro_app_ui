@@ -27,29 +27,6 @@ class _HomeScreenState extends State<HomeScreen> {
       Image.asset("assets/images/sebzemeyve.jpg"),
     ];
 
-    List<Widget> groceries = [
-      ItemWidget(
-          buyItem: BuyItem(
-              "https://www.gercekhayat.com.tr/wp-content/uploads/2019/10/AdobeStock_172352188-800x450.jpg"),
-          function: () {
-            setState(() {
-              CollectItem.collectItems.add(
-                BuyItem(
-                    "https://www.gercekhayat.com.tr/wp-content/uploads/2019/10/AdobeStock_172352188-800x450.jpg"),
-              );
-            });
-          },
-          isInChart: false,
-          deleteFunction: () {
-            setState(() {
-              CollectItem.collectItems.remove(
-                BuyItem(
-                    "https://www.gercekhayat.com.tr/wp-content/uploads/2019/10/AdobeStock_172352188-800x450.jpg"),
-              );
-            });
-          }),
-    ];
-
     List<Widget> bestSellings = [
       ItemWidget(
           buyItem: BuyItem(
@@ -115,6 +92,48 @@ class _HomeScreenState extends State<HomeScreen> {
             });
           }),
     ];
+    List<Widget> groceriesMain = [
+      ItemWidget(
+          buyItem: BuyItem(
+              "https://i20.haber7.net/resize/1300x788//haber/haber7/photos/2021/31/armudun_faydalari_nelerdir_kac_cesit_armut_vardir_armut_neye_iyi_gelir_1628259910_2773.jpg"),
+          function: () {
+            setState(() {
+              CollectItem.collectItems.add(
+                BuyItem(
+                    "https://i20.haber7.net/resize/1300x788//haber/haber7/photos/2021/31/armudun_faydalari_nelerdir_kac_cesit_armut_vardir_armut_neye_iyi_gelir_1628259910_2773.jpg"),
+              );
+            });
+          },
+          isInChart: false,
+          deleteFunction: () {
+            setState(() {
+              CollectItem.collectItems.remove(
+                BuyItem(
+                    "https://i20.haber7.net/resize/1300x788//haber/haber7/photos/2021/31/armudun_faydalari_nelerdir_kac_cesit_armut_vardir_armut_neye_iyi_gelir_1628259910_2773.jpg"),
+              );
+            });
+          }),
+      ItemWidget(
+          buyItem: BuyItem(
+              "https://i20.haber7.net/resize/1300x788//haber/haber7/photos/2021/31/armudun_faydalari_nelerdir_kac_cesit_armut_vardir_armut_neye_iyi_gelir_1628259910_2773.jpg"),
+          function: () {
+            setState(() {
+              CollectItem.collectItems.add(
+                BuyItem(
+                    "https://i20.haber7.net/resize/1300x788//haber/haber7/photos/2021/31/armudun_faydalari_nelerdir_kac_cesit_armut_vardir_armut_neye_iyi_gelir_1628259910_2773.jpg"),
+              );
+            });
+          },
+          isInChart: false,
+          deleteFunction: () {
+            setState(() {
+              CollectItem.collectItems.remove(
+                BuyItem(
+                    "https://i20.haber7.net/resize/1300x788//haber/haber7/photos/2021/31/armudun_faydalari_nelerdir_kac_cesit_armut_vardir_armut_neye_iyi_gelir_1628259910_2773.jpg"),
+              );
+            });
+          }),
+    ];
 
     return Scaffold(
       appBar: AppBar(
@@ -160,13 +179,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   height: 25,
                 ),
                 SizedBox(
-                  height: 150,
-                  child: ListView.builder(
-                      itemBuilder: (context, index) {
-                        return groceries[index];
-                      },
-                      itemCount: groceries.length,
-                      scrollDirection: Axis.horizontal),
+                  height: 25,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -266,6 +279,18 @@ class _HomeScreenState extends State<HomeScreen> {
                       },
                     )
                   ],
+                ),
+                SizedBox(
+                  height: 150,
+                  child: ListView.builder(
+                      itemBuilder: (context, index) {
+                        return groceriesMain[index];
+                      },
+                      itemCount: groceriesMain.length,
+                      scrollDirection: Axis.horizontal),
+                ),
+                const SizedBox(
+                  height: 20,
                 ),
               ],
             ),
