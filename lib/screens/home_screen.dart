@@ -27,7 +27,94 @@ class _HomeScreenState extends State<HomeScreen> {
       Image.asset("assets/images/sebzemeyve.jpg"),
     ];
 
-    List<ItemWidget> buyItems = [];
+    List<Widget> groceries = [
+      ItemWidget(
+          buyItem: BuyItem(
+              "https://www.gercekhayat.com.tr/wp-content/uploads/2019/10/AdobeStock_172352188-800x450.jpg"),
+          function: () {
+            setState(() {
+              CollectItem.collectItems.add(
+                BuyItem(
+                    "https://www.gercekhayat.com.tr/wp-content/uploads/2019/10/AdobeStock_172352188-800x450.jpg"),
+              );
+            });
+          },
+          isInChart: false,
+          deleteFunction: () {
+            setState(() {
+              CollectItem.collectItems.remove(
+                BuyItem(
+                    "https://www.gercekhayat.com.tr/wp-content/uploads/2019/10/AdobeStock_172352188-800x450.jpg"),
+              );
+            });
+          }),
+    ];
+
+    List<Widget> bestSellings = [
+      ItemWidget(
+          buyItem: BuyItem(
+              "https://www.gercekhayat.com.tr/wp-content/uploads/2019/10/AdobeStock_172352188-800x450.jpg"),
+          function: () {
+            setState(() {
+              CollectItem.collectItems.add(
+                BuyItem(
+                    "https://www.gercekhayat.com.tr/wp-content/uploads/2019/10/AdobeStock_172352188-800x450.jpg"),
+              );
+            });
+          },
+          isInChart: false,
+          deleteFunction: () {
+            setState(() {
+              CollectItem.collectItems.remove(
+                BuyItem(
+                    "https://www.gercekhayat.com.tr/wp-content/uploads/2019/10/AdobeStock_172352188-800x450.jpg"),
+              );
+            });
+          }),
+    ];
+
+    List<Widget> exclusiveOrder = [
+      ItemWidget(
+          buyItem: BuyItem(
+              "https://www.gercekhayat.com.tr/wp-content/uploads/2019/10/AdobeStock_172352188-800x450.jpg"),
+          function: () {
+            setState(() {
+              CollectItem.collectItems.add(
+                BuyItem(
+                    "https://www.gercekhayat.com.tr/wp-content/uploads/2019/10/AdobeStock_172352188-800x450.jpg"),
+              );
+            });
+          },
+          isInChart: false,
+          deleteFunction: () {
+            setState(() {
+              CollectItem.collectItems.remove(
+                BuyItem(
+                    "https://www.gercekhayat.com.tr/wp-content/uploads/2019/10/AdobeStock_172352188-800x450.jpg"),
+              );
+            });
+          }),
+      ItemWidget(
+          buyItem: BuyItem(
+              "https://www.gercekhayat.com.tr/wp-content/uploads/2019/10/AdobeStock_172352188-800x450.jpg"),
+          function: () {
+            setState(() {
+              CollectItem.collectItems.add(
+                BuyItem(
+                    "https://www.gercekhayat.com.tr/wp-content/uploads/2019/10/AdobeStock_172352188-800x450.jpg"),
+              );
+            });
+          },
+          isInChart: false,
+          deleteFunction: () {
+            setState(() {
+              CollectItem.collectItems.remove(
+                BuyItem(
+                    "https://www.gercekhayat.com.tr/wp-content/uploads/2019/10/AdobeStock_172352188-800x450.jpg"),
+              );
+            });
+          }),
+    ];
 
     return Scaffold(
       appBar: AppBar(
@@ -72,6 +159,15 @@ class _HomeScreenState extends State<HomeScreen> {
                 const SizedBox(
                   height: 25,
                 ),
+                SizedBox(
+                  height: 150,
+                  child: ListView.builder(
+                      itemBuilder: (context, index) {
+                        return groceries[index];
+                      },
+                      itemCount: groceries.length,
+                      scrollDirection: Axis.horizontal),
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: <Widget>[
@@ -98,53 +194,15 @@ class _HomeScreenState extends State<HomeScreen> {
                     )
                   ],
                 ),
-                Container(
-                    height: 150,
-                    child: ListView(
-                      scrollDirection: Axis.horizontal,
-                      children: [
-                        ItemWidget(
-                            buyItem: BuyItem(
-                                "https://www.gercekhayat.com.tr/wp-content/uploads/2019/10/AdobeStock_172352188-800x450.jpg"),
-                            function: () {
-                              setState(() {
-                                CollectItem.collectItems.add(
-                                  BuyItem(
-                                      "https://www.gercekhayat.com.tr/wp-content/uploads/2019/10/AdobeStock_172352188-800x450.jpg"),
-                                );
-                              });
-                            },
-                            isInChart: false,
-                            deleteFunction: () {
-                              setState(() {
-                                CollectItem.collectItems.remove(
-                                  BuyItem(
-                                      "https://www.gercekhayat.com.tr/wp-content/uploads/2019/10/AdobeStock_172352188-800x450.jpg"),
-                                );
-                              });
-                            }),
-                        ItemWidget(
-                            buyItem: BuyItem(
-                                "https://www.gercekhayat.com.tr/wp-content/uploads/2019/10/AdobeStock_172352188-800x450.jpg"),
-                            function: () {
-                              setState(() {
-                                CollectItem.collectItems.add(
-                                  BuyItem(
-                                      "https://www.gercekhayat.com.tr/wp-content/uploads/2019/10/AdobeStock_172352188-800x450.jpg"),
-                                );
-                              });
-                            },
-                            isInChart: false,
-                            deleteFunction: () {
-                              setState(() {
-                                CollectItem.collectItems.remove(
-                                  BuyItem(
-                                      "https://www.gercekhayat.com.tr/wp-content/uploads/2019/10/AdobeStock_172352188-800x450.jpg"),
-                                );
-                              });
-                            }),
-                      ],
-                    )),
+                SizedBox(
+                  height: 150,
+                  child: ListView.builder(
+                      itemBuilder: (context, index) {
+                        return exclusiveOrder[index];
+                      },
+                      itemCount: exclusiveOrder.length,
+                      scrollDirection: Axis.horizontal),
+                ),
                 const SizedBox(
                   height: 20,
                 ),
@@ -174,32 +232,14 @@ class _HomeScreenState extends State<HomeScreen> {
                     )
                   ],
                 ),
-                Container(
+                SizedBox(
                     height: 150,
-                    child: ListView(
+                    child: ListView.builder(
+                      itemCount: bestSellings.length,
+                      itemBuilder: (context, index) {
+                        return bestSellings[index];
+                      },
                       scrollDirection: Axis.horizontal,
-                      children: [
-                        ItemWidget(
-                            buyItem: BuyItem(
-                                "https://www.gercekhayat.com.tr/wp-content/uploads/2019/10/AdobeStock_172352188-800x450.jpg"),
-                            function: () {
-                              setState(() {
-                                CollectItem.collectItems.add(
-                                  BuyItem(
-                                      "https://www.gercekhayat.com.tr/wp-content/uploads/2019/10/AdobeStock_172352188-800x450.jpg"),
-                                );
-                              });
-                            },
-                            isInChart: false,
-                            deleteFunction: () {
-                              setState(() {
-                                CollectItem.collectItems.remove(
-                                  BuyItem(
-                                      "https://www.gercekhayat.com.tr/wp-content/uploads/2019/10/AdobeStock_172352188-800x450.jpg"),
-                                );
-                              });
-                            }),
-                      ],
                     )),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
