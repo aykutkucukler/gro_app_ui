@@ -44,6 +44,22 @@ class ItemWidget extends StatelessWidget {
                   ),
                 )),
           ),
+          Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Align(
+                alignment: Alignment.bottomLeft,
+                child: CircleAvatar(
+                  radius: 20,
+                  backgroundColor: Colors.white,
+                  child: IconButton(
+                    icon: const Icon(
+                      Icons.favorite,
+                      color: Colors.green,
+                    ),
+                    onPressed: function,
+                  ),
+                )),
+          ),
           isInChart?Padding(
             padding: EdgeInsets.all(8.0),
             child: Align(
